@@ -188,11 +188,13 @@ int		test_s(char *str1, char *str2, int testnum)
   if(strcmp(str1, str2) == 0)
 	{
 	  printf("TEST%d VALID\n", testnum);
+          usleep(0.15*1000000);
 	    return(0);
 	}
 	else
 	{
-	  printf("TEST%d FAILED\n", testnum);
+	  printf("TEST%d FAILED\n", testnum);	
+          usleep(0.15*1000000);
 	  return(1);
   }
 }
@@ -201,13 +203,15 @@ int		test_a(void *arr1, void *arr2, int n, int testnum)
 {
   if(memcmp(arr1, arr2, n) == 0)
 	{
-	  printf("TEST%d VALID\n", testnum);
-	    return(0);
+	  printf("TEST%d VALID\n", testnum);  
+          usleep(0.15*1000000);
+            return(0);
 	}
 	else
 	{
 	  printf("TEST%d FAILED\n", testnum);
-	  return(1);
+	  usleep(0.15*1000000);
+          return(1);
   }
 }
 
