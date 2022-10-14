@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   testprog.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/11 17:43:09 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/14 18:45:43 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,25 @@
 #include <stdio.h>
 #include <string.h>
 
-#define _BOTH  3
-#define _ARR   2
-#define _STR   1
+#define _BOTH         3
+#define _ARR          2
+#define _STR          1
 
-int		test_s(char *str1, char *str2, int testnum);
-int		test_a(void *arr1, void *arr2, int n, int testnum);
-int   ResultCheck(int *TRC, int *LC);
+#define _GREEN        "\e[0;32m"
+#define _RED          "\e[0;31m"
+#define _COLOR_RESET  "\e[0m"
+
+
+// NOTE TO SELF: Debugging why it doesn't reset the string.
+
+int		test(void *input1, void *input2, int len, int testnum, int mode);
+int   ResultCheck(int *TestResultCount, int *LastCount);
 char	*TestResultMsg(int result);
 void	ProjectResultMsg(int ac, char *candidate, int result);
-void  ResetStringsNArrays(char *s1, char *s2, char *os,\
-                          long *a1, long *a2, long *oa, int md);
+void  ResetStringsNArrays(char *s1, char *s2, char *orgs,\
+                          long *a1, long *a2, long *orga, int mode);
+
+void green(void); void red(void); void color_reset(void);
 
 int		main(int argc, char *argv[])
 {
@@ -45,9 +53,6 @@ int		main(int argc, char *argv[])
   
   long rtn3[32] = {0};
   long rtn4[32] = {0};
-  
-  /*char empty_str1[] = "";
-  char empty_str2[] = "";*/
 	
   char candidate[32];
 
@@ -55,23 +60,37 @@ int		main(int argc, char *argv[])
   int LastCount = 0;
   int check = 0;
 	int t = 0;
-  int i = 3;
+  int countdown = 3;
 
 	if(argc == 2)
 		strcpy(candidate, argv[1]);
+
+
+
 	#define FCNAME "TEST PROGRAM"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-  printf("Testprogram: "); TestResultCount += test_s(str1, str2, t++);	
-  /*printf("\n%s\n%s\n\n", str1, str2);*/					                //test start
+  printf("Testprogram: "); TestResultCount += test(str1, str2, _STR, t++, _STR);	
+  printf("\n%s\n%s\n\n", str1, str2);                  					                //test start
   check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
   
+  printf("MEGATEST1: ");
+  for(int i = 0; i < 39; i++)
+    printf("%c", str1[i]);
+  printf("\n");
+
+  printf("MEGATEST2: ");
+  for(int i = 0; i < 39; i++)
+    printf("%c", str2[i]);
+  printf("\n");
+
+
   if (check != 0)
     return(0);
   printf("\n\nOK, THERE WE GO!...");
-  while (i > 0)
+  while (countdown > 0)
   {
-    printf("{%d}", i--);
+    printf("{%d}", countdown--);
     fflush(stdout);
     sleep(1);
     printf("\b\b\b");
@@ -79,65 +98,83 @@ int		main(int argc, char *argv[])
   printf("   ");
   fflush(stdout);
   sleep(1);
+  printf("\n\n");
   
-
-  //memset.c
   #undef FCNAME
 	#define FCNAME "ft_memset.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
 	strncpy(rtn1, memset(str1 + 5, '0', 15 * (sizeof(char))), sizeof(orgs));      //function call + save return
 	strncpy(rtn2, ft_memset(str2 + 5, '0', 15 * (sizeof(char))), sizeof(orgs));   //function call	+ save return
-  TestResultCount += test_s(rtn1, rtn2,  t++);                                  //test return value
-	TestResultCount += test_s(str1, str2, t++);						                        //test after call
-	/*printf("\n%s\n%s\n", str1, str2);
-	printf("\n%s\n%s\n", rtn1, rtn2);*/
+  TestResultCount += test(rtn1, rtn2, _STR, t++, _STR);                         //test return value
+	TestResultCount += test(str1, str2, _STR, t++, _STR);						              //test after call
+	printf("\n%s\n%s\n", str1, str2);
+	printf("\n%s\n%s\n", rtn1, rtn2);
   memset(arr1, -1, sizeof(orga));
   ft_memset(arr2, -1, sizeof(orga));
-  TestResultCount += test_a(arr1, arr2, sizeof(orga), t++);
+  TestResultCount += test(arr1, arr2, sizeof(orga), t++, _ARR);
   check = ResultCheck(&TestResultCount, &LastCount);
+  ResetStringsNArrays(str1, str2, orgs, arr1, arr2, orga, _BOTH);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 
-  ResetStringsNArrays(str1, str2, orgs, arr1, arr2, orga, _BOTH);
+
+  printf("MEGATEST1: ");
+  for(int i = 0; i < 39; i++)
+    printf("%c", str1[i]);
+  printf("\n");
+
+  printf("MEGATEST2: ");
+  for(int i = 0; i < 39; i++)
+    printf("%c", str2[i]);
+  printf("\n");
+
+
   sleep(1);
 
-	//bzero.c
 	#undef FCNAME
 	#define FCNAME "ft_bzero.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	bzero(str1 + 5, 15 * (sizeof(char)));
+	bzero(str1 + 5, 14 * (sizeof(char)));
 	ft_bzero(str2 + 5, 15 * (sizeof(char)));
-	TestResultCount += test_s(str1, str2, t++);
-	TestResultCount += test_s(str1 + 19, str2 + 19, t++);
-	TestResultCount += test_s(str1 + 20, str2 + 20, t++);
-	/*printf("After call:\n{\"%s\"}\n{\"%s\"}\n", str1, str2);
-	printf("'(str + 19)':\n{\"%s\"}\n{\"%s\"}\n", str1 + 19, str2 + 19);
-	printf("'(str + 20)':\n{\"%s\"}\n{\"%s\"}\n\n", str1 + 20, str2 + 20);*/
+	TestResultCount += test(str1, str2, _STR, t++, _STR);
+	TestResultCount += test(str1 + 19, str2 + 19, _STR, t++, _STR);
+	TestResultCount += test(str1 + 20, str2 + 20, _STR, t++, _STR);
+	printf("\nAfter call:\n{\"%s\"}\n{\"%s\"}\n", str1, str2);
+	printf("\n'(str + 19)':\n{\"%s\"}\n{\"%s\"}\n", str1 + 19, str2 + 19);
+	printf("\n'(str + 20)':\n{\"%s\"}\n{\"%s\"}\n\n", str1 + 20, str2 + 20);
   check = ResultCheck(&TestResultCount, &LastCount);
+  ResetStringsNArrays(str1, str2, orgs, arr1, arr2, orga, _STR);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 
-  ResetStringsNArrays(str1, str2, orgs, arr1, arr2, orga, _STR);
+  printf("MEGATEST1: ");
+  for(int i = 0; i < 39; i++)
+    printf("%c", str1[i]);
+  printf("\n");
+
+  printf("MEGATEST2: ");
+  for(int i = 0; i < 39; i++)
+    printf("%c", str2[i]);
+  printf("\n");
+
+
   sleep(1);
 
-	//memcpy.c
 	#undef FCNAME
 	#define FCNAME "ft_memcpy.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-
+  printf("\n%s\n%s\n\n", str1, str2);
   memcpy(rtn3, memcpy(arr1 + 9, orga, 3 * sizeof(long)), 3 * sizeof(long));
   memcpy(rtn4, ft_memcpy(arr2 + 9, orga, 3 * sizeof(long)), 3 * sizeof(long));
-  TestResultCount += test_a(arr1, arr2, sizeof(orga), t++);
-  TestResultCount += test_a(rtn3, rtn4, sizeof(rtn3), t++);
+  TestResultCount += test(arr1, arr2, sizeof(orga), t++, _ARR);
+  TestResultCount += test(rtn3, rtn4, sizeof(rtn3), t++, _ARR);
   ResetStringsNArrays(str1, str2, orgs, arr1, arr2, orga, _ARR);
-
   memcpy(arr1 + 9, arr1, 3 * sizeof(long));
   ft_memcpy(arr2 + 9, arr2, 3 * sizeof(long));
-  TestResultCount += test_a(arr1, arr2, sizeof(orga), t++);
+  TestResultCount += test(arr1, arr2, sizeof(orga), t++, _ARR);
   strncpy(rtn1, memcpy(str1 + 20, orgs + 5, 15), sizeof(orgs));
   strncpy(rtn2, ft_memcpy(str2 + 20, orgs + 5, 15), sizeof(orgs));
-  TestResultCount += test_a(str1, str2, sizeof(orgs), t++);
-  TestResultCount += test_a(rtn1, rtn2, sizeof(orgs), t++);
-
- /* for(int i = 0; i < 12; i++)
+  TestResultCount += test(str1, str2, sizeof(orgs), t++, _ARR);
+  TestResultCount += test(rtn1, rtn2, sizeof(orgs), t++, _ARR);
+  for(int i = 0; i < 12; i++)
     printf("%ld, ", arr1[i]);
   putchar('\n');
   for(int i = 0; i < 12; i++)
@@ -149,131 +186,124 @@ int		main(int argc, char *argv[])
   for(int i = 0; i < 20; i++)
     printf("%ld, ", rtn4[i]);
   printf("\n%s\n%s\n", rtn1, rtn2);
-  printf("\n%s\n%s\n", str1, str2);*/
+  printf("\n%s\n%s\n", str1, str2);
+
   check = ResultCheck(&TestResultCount, &LastCount);
+  ResetStringsNArrays(str1, str2, orgs, arr1, arr2, orga, _BOTH);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 
-  ResetStringsNArrays(str1, str2, orgs, arr1, arr2, orga, _BOTH);
 	sleep(1);
-  
- /* #undef FCNAME
-	#define FCNAME "ft_memccpy.c"
-	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-  memccpy(arr1, arr1 + 1, 111, sizeof(orga) - 1);
-  ft_memccpy(arr2, arr2 + 1, 111, sizeof(orga) - 1);
-  TestResultCount += test_a(arr1, arr2, sizeof(orga), t++);
-  ResetStringsNArrays(str1, str2, orgs, arr1, arr2, orga, _ARR); // test end
-  memccpy(arr1, arr1 + 1, -2147483648, sizeof(orga) - 1);
-  ft_memccpy(arr2, arr2 + 1, -2147483648, sizeof(orga) - 1);
-  TestResultCount += test_a(arr1, arr2, sizeof(orga), t++);
-  ResetStringsNArrays(str1, str2, orgs, arr1, arr2, orga, _ARR); // test end
-  memccpy(arr1, arr1 + 1, 4444, sizeof(orga) - sizeof(long));
-  ft_memccpy(arr2, arr2 + 1, 4444, sizeof(orga) - sizeof(long));
-  TestResultCount += test_a(arr1, arr2, sizeof(orga), t++);
-  ResetStringsNArrays(str1, str2, orgs, arr1, arr2, orga, _ARR); // test end
-  
-  for(int i = 0; i < 12; i++)
-    printf("%ld, ", arr1[i]);
-  putchar('\n');
-  check = ResultCheck(&TestResultCount, &LastCount);
-	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));*/
+
 
 	//--FINAL RESULTS--
 	ProjectResultMsg(argc, candidate, TestResultCount);
 	return(0);
 }
+// -------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
 
-int		test_s(char *str1, char *str2, int testnum)
+int		test(void *input1, void *input2, int len, int testnum, int mode)
 {
-  if(strcmp(str1, str2) == 0)
-	{
-	  printf("TEST%d VALID\n", testnum);
-          usleep(0.15*1000000);
+  if (mode == _STR)
+  {
+    if(strcmp(input1, input2) == 0)
+	  {
+	    printf(_GREEN "TEST%d VALID\n" _COLOR_RESET, testnum);
+      usleep(0.15*1000000);
 	    return(0);
-	}
-	else
-	{
-	  printf("TEST%d FAILED\n", testnum);	
-          usleep(0.15*1000000);
-	  return(1);
+	  }
+	  else
+	  {
+	    printf(_RED "TEST%d FAILED\n" _COLOR_RESET, testnum);	
+      usleep(0.15*1000000);
+	    return(1);
+    }
+  }
+  if(mode == _ARR)
+  {
+    if(memcmp(input1, input2, len) == 0)
+	  {
+	    printf(_GREEN "TEST%d VALID\n" _COLOR_RESET, testnum);
+      usleep(0.15*1000000);
+      return(0);
+	  }
+	  else
+  	{
+	    printf(_RED "TEST%d FAILED\n" _COLOR_RESET, testnum);
+	    usleep(0.15*1000000);
+      return(1);
+    }
+  }
+  return (-1);
+}
+// -------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
+void  ResetStringsNArrays(char *s1, char *s2, char *orgs,\
+                          long *a1, long *a2, long *orga, int mode)
+{
+  if(mode == _BOTH)
+  {
+    memcpy(a1, orga, sizeof(*orga));
+    memcpy(a2, orga, sizeof(*orga));
+    strncpy(s1, orgs, sizeof(*orgs));
+	  strncpy(s2, orgs, sizeof(*orgs));
+  }
+  if(mode == _ARR)
+  {
+    memcpy(a1, orga, sizeof(*orga));
+    memcpy(a2, orga, sizeof(*orga));
+  }
+  if(mode == _STR)
+  {
+    strncpy(s1, orgs, sizeof(*orgs));
+	  strncpy(s2, orgs, sizeof(*orgs));
+    printf("BLOOOOOP: \n%s\n%s\n\n", s1, s2);    
   }
 }
-
-int		test_a(void *arr1, void *arr2, int n, int testnum)
+// -------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
+int   ResultCheck(int *TestResultCount, int *LastCount)
 {
-  if(memcmp(arr1, arr2, n) == 0)
-	{
-	  printf("TEST%d VALID\n", testnum);  
-          usleep(0.15*1000000);
-            return(0);
-	}
-	else
-	{
-	  printf("TEST%d FAILED\n", testnum);
-	  usleep(0.15*1000000);
-          return(1);
-  }
-}
-
-void  ResetStringsNArrays(char *s1, char *s2, char *os,\
-                          long *a1, long *a2, long *oa, int md)
-{
-  if(md == _BOTH)
+  if(*TestResultCount != *LastCount)
   {
-    memcpy(a1, oa, sizeof(*oa));
-    memcpy(a2, oa, sizeof(*oa));
-    strncpy(s1, os, sizeof(*os));
-	  strncpy(s2, os, sizeof(*os));
-  }
-  if(md == _ARR)
-  {
-    memcpy(a1, oa, sizeof(*oa));
-    memcpy(a2, oa, sizeof(*oa));
-  }
-  if(md == _STR)
-  {
-    strncpy(s1, os, sizeof(*os));
-	  strncpy(s2, os, sizeof(*os));
-  }
-}
-
-int   ResultCheck(int *TRC, int *LC)
-{
-  if(*TRC != *LC)
-  {
-    *LC = *TRC;
+    *LastCount = *TestResultCount;
     return(1);
   }
   return(0);
 }
 
+// -------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
 char	*TestResultMsg(int result)
 {
 	if(result == 0)
 		return("COMPLETED");
-	else
+	else if (result == 1)
 		return("FAILED");
-	return(0);
+  else
+	  return("ERROR in testprogram - please correct code.");
 }
 
+// -------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
 void	ProjectResultMsg(int ac, char *candidate, int result)
 {
 	if(result == 0)
 		if(ac == 2)
-			printf("\n\n\n* * * * *  TESTS FULLY PASSED. Congrats %s!  * * * * *\n\n"
+			printf(_GREEN "\e[1m" "\n\n\n* * * * *  TESTS FULLY PASSED. Congrats %s!  * * * * *\n\n"
             , candidate);
 		else
-			printf("\n\n\n* * * * *  TESTS FULLY PASSED. Congrats!  * * * * *\n\n");
+			printf(_GREEN "\e[1m" "\n\n\n* * * * *  TESTS FULLY PASSED. Congrats!  * * * * *\n\n");
 	else
 		if(ac == 2)
 		{
-			printf("\n\n\nSorry %s, you failed %d tests."
+			printf(_RED "\e[1m" "\n\n\nSorry %s, you failed %d tests."
 			        " Let's see where it went wrong!\n\n"
               , candidate, result);
 		}
 		else
 		{
-			printf("\n\n\nSorry, you failed %d tests."
+			printf(_RED "\e[1m" "\n\n\nSorry, you failed %d tests."
 		          " Let's see where it went wrong!\n\n"
               , result);
 		}
