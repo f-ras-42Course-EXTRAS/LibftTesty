@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/14 18:45:43 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/14 20:21:27 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,12 @@
 #define _COLOR_RESET  "\e[0m"
 
 
-// NOTE TO SELF: Debugging why it doesn't reset the string.
-
 int		test(void *input1, void *input2, int len, int testnum, int mode);
 int   ResultCheck(int *TestResultCount, int *LastCount);
 char	*TestResultMsg(int result);
 void	ProjectResultMsg(int ac, char *candidate, int result);
 void  ResetStringsNArrays(char *s1, char *s2, char *orgs,\
                           long *a1, long *a2, long *orga, int mode);
-
-void green(void); void red(void); void color_reset(void);
 
 int		main(int argc, char *argv[])
 {
@@ -73,17 +69,6 @@ int		main(int argc, char *argv[])
   printf("\n%s\n%s\n\n", str1, str2);                  					                //test start
   check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
-  
-  printf("MEGATEST1: ");
-  for(int i = 0; i < 39; i++)
-    printf("%c", str1[i]);
-  printf("\n");
-
-  printf("MEGATEST2: ");
-  for(int i = 0; i < 39; i++)
-    printf("%c", str2[i]);
-  printf("\n");
-
 
   if (check != 0)
     return(0);
@@ -116,24 +101,12 @@ int		main(int argc, char *argv[])
   ResetStringsNArrays(str1, str2, orgs, arr1, arr2, orga, _BOTH);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 
-
-  printf("MEGATEST1: ");
-  for(int i = 0; i < 39; i++)
-    printf("%c", str1[i]);
-  printf("\n");
-
-  printf("MEGATEST2: ");
-  for(int i = 0; i < 39; i++)
-    printf("%c", str2[i]);
-  printf("\n");
-
-
   sleep(1);
 
 	#undef FCNAME
 	#define FCNAME "ft_bzero.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	bzero(str1 + 5, 14 * (sizeof(char)));
+	bzero(str1 + 5, 15 * (sizeof(char)));
 	ft_bzero(str2 + 5, 15 * (sizeof(char)));
 	TestResultCount += test(str1, str2, _STR, t++, _STR);
 	TestResultCount += test(str1 + 19, str2 + 19, _STR, t++, _STR);
@@ -144,17 +117,6 @@ int		main(int argc, char *argv[])
   check = ResultCheck(&TestResultCount, &LastCount);
   ResetStringsNArrays(str1, str2, orgs, arr1, arr2, orga, _STR);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
-
-  printf("MEGATEST1: ");
-  for(int i = 0; i < 39; i++)
-    printf("%c", str1[i]);
-  printf("\n");
-
-  printf("MEGATEST2: ");
-  for(int i = 0; i < 39; i++)
-    printf("%c", str2[i]);
-  printf("\n");
-
 
   sleep(1);
 
@@ -187,13 +149,18 @@ int		main(int argc, char *argv[])
     printf("%ld, ", rtn4[i]);
   printf("\n%s\n%s\n", rtn1, rtn2);
   printf("\n%s\n%s\n", str1, str2);
+  for(int i = 0; i < 39; i++)
+    printf("%c", str1[i]);
+  printf("\n");
+  for(int i = 0; i < 39; i++)
+    printf("%c", str2[i]);
+  printf("\n");
 
   check = ResultCheck(&TestResultCount, &LastCount);
   ResetStringsNArrays(str1, str2, orgs, arr1, arr2, orga, _BOTH);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 
 	sleep(1);
-
 
 	//--FINAL RESULTS--
 	ProjectResultMsg(argc, candidate, TestResultCount);
@@ -243,21 +210,20 @@ void  ResetStringsNArrays(char *s1, char *s2, char *orgs,\
 {
   if(mode == _BOTH)
   {
-    memcpy(a1, orga, sizeof(*orga));
-    memcpy(a2, orga, sizeof(*orga));
-    strncpy(s1, orgs, sizeof(*orgs));
-	  strncpy(s2, orgs, sizeof(*orgs));
+    memcpy(a1, orga, 12 * sizeof(long));
+    memcpy(a2, orga, 12 * sizeof(long));
+    strcpy(s1, orgs);
+	  strcpy(s2, orgs);
   }
   if(mode == _ARR)
   {
-    memcpy(a1, orga, sizeof(*orga));
-    memcpy(a2, orga, sizeof(*orga));
+    memcpy(a1, orga, 12 * sizeof(long));
+    memcpy(a2, orga, 12 * sizeof(long));
   }
   if(mode == _STR)
   {
-    strncpy(s1, orgs, sizeof(*orgs));
-	  strncpy(s2, orgs, sizeof(*orgs));
-    printf("BLOOOOOP: \n%s\n%s\n\n", s1, s2);    
+    strcpy(s1, orgs);
+	  strcpy(s2, orgs);
   }
 }
 // -------------------------------------------------------------------------------------
