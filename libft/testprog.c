@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/21 19:51:38 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/21 21:03:50 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -469,6 +469,156 @@ int		main(int argc, char *argv[])
 
 	usleep(0.15*1000000);
 
+	#define FCNAME "ft_strlcat.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	rtn7 = strlcat(str3, str1, sizeof(str3));
+	rtn8 = ft_strlcat(str4, str2, sizeof(str4));
+	TestResultCount += test(str3, str4, 0, t++, _STR);
+	TestResultCount += simple_test(rtn7, rtn8, t++);
+	printf("1: \n%s\n%s\n", str3, str4);
+	printf("1: \n%lu-%lu\n\n", rtn7, rtn8);
+	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
+	rtn7 = strlcat(str3, str1, (sizeof(str3) - 30));
+	rtn8 = ft_strlcat(str4, str2, (sizeof(str4) - 30));
+	TestResultCount += test(str3, str4, 0, t++, _STR);
+	TestResultCount += simple_test(rtn7, rtn8, t++);
+	printf("2: \n%s\n%s\n", str3, str4);
+	printf("2: \n%lu-%lu\n\n", rtn7, rtn8);
+	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
+	rtn7 = strlcat(str3, empty_str, sizeof(str3));
+	rtn8 = ft_strlcat(str4, empty_str, sizeof(str4));
+	TestResultCount += test(str3, str4, 0, t++, _STR);
+	TestResultCount += simple_test(rtn7, rtn8, t++);
+	printf("3: \n%s\n%s\n", str3, str4);
+	printf("3: \n%lu-%lu\n", rtn7, rtn8);
+	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
+	rtn7 = strlcat(str3, str1, 0);
+	rtn8 = ft_strlcat(str4, str2, 0);
+	TestResultCount += test(str3, str4, 0, t++, _STR);
+	TestResultCount += simple_test(rtn7, rtn8, t++);
+	printf("4: \n%s\n%s\n", str3, str4);
+	printf("4: \n%lu-%lu\n\n", rtn7, rtn8);
+	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
+	rtn7 = strlcat(str3, str1, 10);
+	rtn8 = ft_strlcat(str4, str2, 10);
+	TestResultCount += test(str3, str4, 0, t++, _STR);
+	TestResultCount += simple_test(rtn7, rtn8, t++);
+	printf("5: \n%s\n%s\n", str3, str4);
+	printf("5: \n%lu-%lu\n\n", rtn7, rtn8);
+	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+	usleep(0.15*1000000);
+
+	#define FCNAME "ft_strlcat.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	rtn7 = strlcat(str3, str1, sizeof(str3));
+	rtn8 = ft_strlcat(str4, str2, sizeof(str4));
+	TestResultCount += test(str3, str4, 0, t++, _STR);
+	TestResultCount += simple_test(rtn7, rtn8, t++);
+	printf("1: \n%s\n%s\n", str3, str4);
+	printf("1: \n%lu-%lu\n\n", rtn7, rtn8);
+	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
+	rtn7 = strlcat(str3, str1, (sizeof(str3) - 30));
+	rtn8 = ft_strlcat(str4, str2, (sizeof(str4) - 30));
+	TestResultCount += test(str3, str4, 0, t++, _STR);
+	TestResultCount += simple_test(rtn7, rtn8, t++);
+	printf("2: \n%s\n%s\n", str3, str4);
+	printf("2: \n%lu-%lu\n\n", rtn7, rtn8);
+	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
+	rtn7 = strlcat(str3, empty_str, sizeof(str3));
+	rtn8 = ft_strlcat(str4, empty_str, sizeof(str4));
+	TestResultCount += test(str3, str4, 0, t++, _STR);
+	TestResultCount += simple_test(rtn7, rtn8, t++);
+	printf("3: \n%s\n%s\n", str3, str4);
+	printf("3: \n%lu-%lu\n", rtn7, rtn8);
+	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
+	rtn7 = strlcat(str3, str1, 0);
+	rtn8 = ft_strlcat(str4, str2, 0);
+	TestResultCount += test(str3, str4, 0, t++, _STR);
+	TestResultCount += simple_test(rtn7, rtn8, t++);
+	printf("4: \n%s\n%s\n", str3, str4);
+	printf("4: \n%lu-%lu\n\n", rtn7, rtn8);
+	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
+	rtn7 = strlcat(str3, str1, 10);
+	rtn8 = ft_strlcat(str4, str2, 10);
+	TestResultCount += test(str3, str4, 0, t++, _STR);
+	TestResultCount += simple_test(rtn7, rtn8, t++);
+	printf("5: \n%s\n%s\n", str3, str4);
+	printf("5: \n%lu-%lu\n\n", rtn7, rtn8);
+	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+	usleep(0.15*1000000);
+
+	#define FCNAME "ft_toupper.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	for (int i = 0; i <= 255; i++)
+	{
+		arr3[i] = i;
+		arr4[i] = i - 128;
+	}
+	for (int i = 0; i <= 255; i++)
+	{
+		rtn5[i] = toupper(arr3[i]);
+		rtn6[i] = ft_toupper(arr3[i]);
+	}
+	for (int i = 0; i <= 255; i++)
+		printf("%c:%c - ", rtn5[i], rtn6[i]);
+	printf("\n\n");
+	TestResultCount += test(rtn5, rtn6, sizeof(arr3), t++, _ARR);
+	printf("\n\n");
+	for (int i = 0; i <= 255; i++)
+	{
+		rtn5[i] = toupper(arr4[i]);
+		rtn6[i] = ft_toupper(arr4[i]);
+	}
+	for (int i = 0; i <= 255; i++)
+		printf("%c:%c - ", rtn5[i], rtn6[i]);
+	printf("\n\n");
+	TestResultCount += test(rtn5, rtn6, sizeof(arr4), t++, _ARR);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+	usleep(0.15*1000000);
+
+	#define FCNAME "ft_tolower.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	for (int i = 0; i <= 255; i++)
+	{
+		arr3[i] = i;
+		arr4[i] = i - 128;
+	}
+	for (int i = 0; i <= 255; i++)
+	{
+		rtn5[i] = tolower(arr3[i]);
+		rtn6[i] = ft_tolower(arr3[i]);
+	}
+	for (int i = 0; i <= 255; i++)
+		printf("%c:%c - ", rtn5[i], rtn6[i]);
+	printf("\n\n");
+	TestResultCount += test(rtn5, rtn6, sizeof(arr3), t++, _ARR);
+	printf("\n\n");
+	for (int i = 0; i <= 255; i++)
+	{
+		rtn5[i] = tolower(arr4[i]);
+		rtn6[i] = ft_tolower(arr4[i]);
+	}
+	for (int i = 0; i <= 255; i++)
+		printf("%c:%c - ", rtn5[i], rtn6[i]);
+	printf("\n\n");
+	TestResultCount += test(rtn5, rtn6, sizeof(arr4), t++, _ARR);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+	
+
 	//--FINAL RESULTS--
 	ProjectResultMsg(argc, candidate, TestResultCount);
 	return(0);
@@ -483,13 +633,13 @@ int		test(void *input1, void *input2, int len, int testnum, int mode)
 		if(strcmp(input1, input2) == 0)
 		{
 			printf(_GREEN "TEST%d VALID\n" _COLOR_RESET, testnum);
-			usleep(0.1*1000000);
+			usleep(0.075*1000000);
 			return(0);
 		}
 		else
 		{
 			printf(_RED "TEST%d FAILED\n" _COLOR_RESET, testnum);	
-			usleep(0.1*1000000);
+			usleep(0.075*1000000);
 			return(1);
 		}
 	}
@@ -498,13 +648,13 @@ int		test(void *input1, void *input2, int len, int testnum, int mode)
 		if(memcmp(input1, input2, len) == 0)
 		{
 			printf(_GREEN "TEST%d VALID\n" _COLOR_RESET, testnum);
-			usleep(0.1*1000000);
+			usleep(0.075*1000000);
 			return(0);
 		}
 		else
 		{
 			printf(_RED "TEST%d FAILED\n" _COLOR_RESET, testnum);
-			usleep(0.1*1000000);
+			usleep(0.075*1000000);
 			return(1);
 		}
 	}
@@ -517,13 +667,13 @@ int  simple_test(int input1, int input2, int testnum)
 	if (input1 == input2)
 		{
 			printf(_GREEN "TEST%d VALID\n" _COLOR_RESET, testnum);
-			usleep(0.1*1000000);
+			usleep(0.075*1000000);
 			return(0);
 		}
 		else
 		{
 			printf(_RED "TEST%d FAILED\n" _COLOR_RESET, testnum);
-			usleep(0.1*1000000);
+			usleep(0.075*1000000);
 			return(1);
 		}
 }
