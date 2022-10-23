@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/21 21:03:50 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/23 18:03:27 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ResultCheck(int *TestResultCount, int *LastCount);
 char	*TestResultMsg(int result);
 void	ProjectResultMsg(int ac, char *candidate, int result);
 void	ResetStringsNArrays(char *s1, char *s2, char *orgs,\
-													long *a1, long *a2, long *orga, int mode);
+							long *a1, long *a2, long *orga, int mode);
 
 int		main(int argc, char *argv[])
 {
