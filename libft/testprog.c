@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/23 18:03:27 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/24 01:46:54 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #define _STR          1
 #define _ARR          2
 #define _BOTH         3
+#define _NULL         4
 
 #define _GREEN        "\e[0;32m"
 #define _RED          "\e[0;31m"
@@ -617,7 +618,61 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	
+	usleep(0.15*1000000);
+
+	#define FCNAME "ft_strchr.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	TestResultCount += test(strchr(str1, 'x'), ft_strchr(str1, 'x'), 0, t++, _NULL);
+	TestResultCount += test(strchr(str1, 'e'), ft_strchr(str1, 'e'), 0, t++, _STR);
+	TestResultCount += test(strchr(str1, '\0'), ft_strchr(str1, '\0'), 0, t++, _NULL);
+	printf("%s || %s\n", strchr(str1, 'x'), ft_strchr(str1, 'x'));
+	printf("%p || %p\n", strchr(str1, 'x'), ft_strchr(str1, 'x'));
+	printf("%s || %s\n", strchr(str1, 'e'), ft_strchr(str1, 'e'));
+	printf("%s || %s\n", strchr(str1, '\0'), ft_strchr(str1, '\0'));
+	printf("%p || %p\n", strchr(str1, '\0'), ft_strchr(str1, '\0'));
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+	usleep(0.15*1000000);
+
+	#define FCNAME "ft_strrchr.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	TestResultCount += test(strrchr(str1, 'x'), ft_strrchr(str1, 'x'), 0, t++, _NULL);
+	TestResultCount += test(strrchr(str1, 'e'), ft_strrchr(str1, 'e'), 0, t++, _STR);
+	TestResultCount += test(strrchr(str1, '\0'), ft_strrchr(str1, '\0'), 0, t++, _NULL);
+	printf("%s || %s\n", strrchr(str1, 'x'), ft_strrchr(str1, 'x'));
+	printf("%p || %p\n", strrchr(str1, 'x'), ft_strrchr(str1, 'x'));
+	printf("%s || %s\n", strrchr(str1, 'e'), ft_strrchr(str1, 'e'));
+	printf("%s || %s\n", strrchr(str1, '\0'), ft_strrchr(str1, '\0'));
+	printf("%p || %p\n", strrchr(str1, '\0'), ft_strrchr(str1, '\0'));
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+	usleep(0.15*1000000);
+
+	#define FCNAME "ft_strncmp.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	TestResultCount += simple_test(strncmp(str1, str2, sizeof(str1)), ft_strncmp(str1, str2, sizeof(str1)), t++);
+	printf("[%d] - [%d]\n", strncmp(str1, str2, sizeof(str1)), ft_strncmp(str1, str2, sizeof(str1)));
+	TestResultCount += simple_test(strncmp("hello", "helli", 6), ft_strncmp("hello", "helli", 6), t++);
+	printf("[%d] - [%d]\n", strncmp("hello", "helli", 6), ft_strncmp("hello", "helli", 6));
+	TestResultCount += simple_test(strncmp("hello", "hellx", 6), ft_strncmp("hello", "hellx", 6), t++);
+	printf("[%d] - [%d]\n", strncmp("hello", "hellx", 6), ft_strncmp("hello", "hellx", 6));
+	TestResultCount += simple_test(strncmp("hello", "hellx", 4), ft_strncmp("hello", "hellx", 4), t++);
+	printf("[%d] - [%d]\n", strncmp("hello", "hellx", 4), ft_strncmp("hello", "hellx", 4));
+	TestResultCount += simple_test(strncmp("hello", "hellx", 5), ft_strncmp("hello", "hellx", 5), t++);
+	printf("[%d] - [%d]\n", strncmp("hello", "hellx", 5), ft_strncmp("hello", "hellx", 5));
+	TestResultCount += simple_test(strncmp("hello", "hellx", 0), ft_strncmp("hello", "hellx", 0), t++);
+	printf("[%d] - [%d]\n", strncmp("hello", "hellx", 0), ft_strncmp("hello", "hellx", 0));
+	TestResultCount += simple_test(strncmp("hello", "uellx", 1), ft_strncmp("hello", "uellx", 1), t++);
+	printf("[%d] - [%d]\n", strncmp("hello", "uellx", 1), ft_strncmp("hello", "uellx", 1));
+	TestResultCount += simple_test(strncmp("a", "", 10), ft_strncmp("a", "", 10), t++);
+	printf("[%d] - [%d]\n", strncmp("a", "", 10), ft_strncmp("a", "", 10));
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
 
 	//--FINAL RESULTS--
 	ProjectResultMsg(argc, candidate, TestResultCount);
@@ -654,6 +709,21 @@ int		test(void *input1, void *input2, int len, int testnum, int mode)
 		else
 		{
 			printf(_RED "TEST%d FAILED\n" _COLOR_RESET, testnum);
+			usleep(0.075*1000000);
+			return(1);
+		}
+	}
+	if(mode == _NULL)
+	{
+		if(input1 == input2)
+		{
+			printf(_GREEN "TEST%d VALID\n" _COLOR_RESET, testnum);
+			usleep(0.075*1000000);
+			return(0);
+		}
+		else
+		{
+			printf(_RED "TEST%d FAILED\n" _COLOR_RESET, testnum);	
 			usleep(0.075*1000000);
 			return(1);
 		}
