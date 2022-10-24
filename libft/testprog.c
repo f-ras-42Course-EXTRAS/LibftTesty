@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/24 13:34:17 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/24 16:52:39 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*TestResultMsg(int result);
 void	ProjectResultMsg(int ac, char *candidate, int result);
 void	ResetStringsNArrays(char *s1, char *s2, char *orgs,\
 							long *a1, long *a2, long *orga, int mode);
+
+int	g_speedmode = 0;
 
 int		main(int argc, char *argv[])
 {
@@ -77,7 +79,12 @@ int		main(int argc, char *argv[])
 	int t = 0;
 	int countdown = 3;
 
-	if(argc == 2)
+	if (argc == 2 && strcmp(argv[1], "SPEEDMODE") == 0)
+	{
+		g_speedmode = 1;
+		argc = 1;
+	}
+	else if (argc == 2)
 		strcpy(candidate, argv[1]);
 
 
@@ -97,12 +104,12 @@ int		main(int argc, char *argv[])
 	{
 		printf("{%d}", countdown--);
 		fflush(stdout);
-		usleep(0.15*1000000);
+		if (!g_speedmode) usleep(0.5*1000000);
 		printf("\b\b\b");
 	}
 	printf("   ");
 	fflush(stdout);
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 	printf("\n\n");
 	
 	#define FCNAME "ft_memset.c"
@@ -121,7 +128,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_bzero.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -138,7 +145,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_memcpy.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -179,7 +186,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_isalpha.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -211,7 +218,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_isdigit.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -243,7 +250,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_isalnum.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -275,7 +282,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 	
 	#define FCNAME "ft_isascii.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -307,7 +314,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 	
 	#define FCNAME "ft_isprint.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -339,7 +346,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 	
 	#define FCNAME "ft_strlen.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -426,7 +433,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_strlcat.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -469,7 +476,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_strlcat.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -512,7 +519,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_strlcat.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -562,7 +569,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_toupper.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -594,7 +601,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_tolower.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -626,7 +633,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_strchr.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -653,7 +660,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_strrchr.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -680,7 +687,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
 
 	#define FCNAME "ft_strncmp.c"
@@ -707,7 +714,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_memchr.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -748,7 +755,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_memcmp.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -775,14 +782,23 @@ int		main(int argc, char *argv[])
 	arr2[2] = -2147483649;
 	TestResultCount += zero_neg_pos_test(memcmp(arr1, arr2, sizeof(orga)), ft_memcmp(arr1, arr2, sizeof(orga)), t++);
 	printf("[%d] - [%d]\n", memcmp(arr1, arr2, sizeof(orga)), ft_memcmp(arr1, arr2, sizeof(orga)));
+	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _ARR);
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	usleep(0.15*1000000);
+	if (!g_speedmode) usleep(0.15*1000000);
 
-	#define FCNAME "ft_.c"
+	#define FCNAME "ft_strnstr.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	TestResultCount += test(strnstr(str1, "[zero this out]", sizeof(str1)),\
+	 ft_strnstr(str1, "[zero this out]", sizeof(str1)), 0, t++, _STR);
+	printf("%s\n%s\n", strnstr(str1, "[zero this out]", sizeof(str1)),\
+	 ft_strnstr(str1, "[zero this out]", sizeof(str1)));
+	TestResultCount += test(strnstr(str1, "", sizeof(str1)),\
+	 ft_strnstr(str1, "", sizeof(str1)), 0, t++, _STR);
+	printf("%s\n%s\n", strnstr(str1, "", sizeof(str1)),\
+	 ft_strnstr(str1, "", sizeof(str1)));
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
@@ -801,13 +817,13 @@ int		test(void *input1, void *input2, int len, int testnum, int mode)
 		if(strcmp(input1, input2) == 0)
 		{
 			printf(_GREEN "TEST%d VALID\n" _COLOR_RESET, testnum);
-			usleep(0.075*1000000);
+			if (!g_speedmode) usleep(0.075*1000000);
 			return(0);
 		}
 		else
 		{
 			printf(_RED "TEST%d FAILED\n" _COLOR_RESET, testnum);	
-			usleep(0.075*1000000);
+			if (!g_speedmode) usleep(0.075*1000000);
 			return(1);
 		}
 	}
@@ -816,13 +832,13 @@ int		test(void *input1, void *input2, int len, int testnum, int mode)
 		if(memcmp(input1, input2, len) == 0)
 		{
 			printf(_GREEN "TEST%d VALID\n" _COLOR_RESET, testnum);
-			usleep(0.075*1000000);
+			if (!g_speedmode) usleep(0.075*1000000);
 			return(0);
 		}
 		else
 		{
 			printf(_RED "TEST%d FAILED\n" _COLOR_RESET, testnum);
-			usleep(0.075*1000000);
+			if (!g_speedmode) usleep(0.075*1000000);
 			return(1);
 		}
 	}
@@ -831,13 +847,13 @@ int		test(void *input1, void *input2, int len, int testnum, int mode)
 		if(input1 == input2)
 		{
 			printf(_GREEN "TEST%d VALID\n" _COLOR_RESET, testnum);
-			usleep(0.075*1000000);
+			if (!g_speedmode) usleep(0.075*1000000);
 			return(0);
 		}
 		else
 		{
 			printf(_RED "TEST%d FAILED\n" _COLOR_RESET, testnum);	
-			usleep(0.075*1000000);
+			if (!g_speedmode) usleep(0.075*1000000);
 			return(1);
 		}
 	}
@@ -850,13 +866,13 @@ int  simple_test(int input1, int input2, int testnum)
 	if (input1 == input2)
 		{
 			printf(_GREEN "TEST%d VALID\n" _COLOR_RESET, testnum);
-			usleep(0.075*1000000);
+			if (!g_speedmode) usleep(0.075*1000000);
 			return(0);
 		}
 		else
 		{
 			printf(_RED "TEST%d FAILED\n" _COLOR_RESET, testnum);
-			usleep(0.075*1000000);
+			if (!g_speedmode) usleep(0.075*1000000);
 			return(1);
 		}
 }
@@ -868,13 +884,13 @@ int  zero_neg_pos_test(int input1, int input2, int testnum)
 			|| (input1 < 0 && input2 < 0))
 		{
 			printf(_GREEN "TEST%d VALID\n" _COLOR_RESET, testnum);
-			usleep(0.075*1000000);
+			if (!g_speedmode) usleep(0.075*1000000);
 			return(0);
 		}
 		else
 		{
 			printf(_RED "TEST%d FAILED\n" _COLOR_RESET, testnum);
-			usleep(0.075*1000000);
+			if (!g_speedmode) usleep(0.075*1000000);
 			return(1);
 		}
 }
