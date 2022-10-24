@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/24 17:22:31 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/24 21:17:44 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -814,6 +814,84 @@ int		main(int argc, char *argv[])
 	 ft_strnstr(str1, "elc", sizeof(str1)), 0, t++, _VAL);
 	printf("OR: %s\nFT: %s\n", strnstr(str1, "elc", sizeof(str1)),\
 	 ft_strnstr(str1, "elc", sizeof(str1)));
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_strnstr.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	TestResultCount += test(strnstr(str1, "[zero this out]", sizeof(str1)),\
+	 ft_strnstr(str1, "[zero this out]", sizeof(str1)), 0, t++, _STR);
+	printf("OR: %s\nFT: %s\n", strnstr(str1, "[zero this out]", sizeof(str1)),\
+	 ft_strnstr(str1, "[zero this out]", sizeof(str1)));
+	TestResultCount += test(strnstr(str1, "", sizeof(str1)),\
+	 ft_strnstr(str1, "", sizeof(str1)), 0, t++, _STR);
+	printf("OR: %s\nFT: %s\n", strnstr(str1, "", sizeof(str1)),\
+	 ft_strnstr(str1, "", sizeof(str1)));
+	TestResultCount += test(strnstr("", "", sizeof(str1)),\
+	 ft_strnstr("", "", sizeof(str1)), 0, t++, _VAL);
+	printf("OR: %s\nFT: %s\n", strnstr("", "", sizeof(str1)),\
+	 ft_strnstr("", "", sizeof(str1)));
+	TestResultCount += test(strnstr(str1, "[zero this out]", sizeof(str1) - 20),\
+	 ft_strnstr(str1, "[zero this out]", sizeof(str1) - 20), 0, t++, _VAL);
+	printf("OR: %s\nFT: %s\n", strnstr(str1, "[zero this out]", sizeof(str1) - 20),\
+	 ft_strnstr(str1, "[zero this out]", sizeof(str1) - 20));
+	TestResultCount += test(strnstr(str1, "[zero this out]", sizeof(str1) - 19),\
+	 ft_strnstr(str1, "[zero this out]", sizeof(str1) - 19), 0, t++, _VAL);
+	printf("OR: %s\nFT: %s\n", strnstr(str1, "[zero this out]", sizeof(str1) - 19),\
+	 ft_strnstr(str1, "[zero this out]", sizeof(str1) - 19));
+	TestResultCount += test(strnstr(str1, "elc", sizeof(str1)),\
+	 ft_strnstr(str1, "elc", sizeof(str1)), 0, t++, _VAL);
+	printf("OR: %s\nFT: %s\n", strnstr(str1, "elc", sizeof(str1)),\
+	 ft_strnstr(str1, "elc", sizeof(str1)));
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_atoi.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	TestResultCount += simple_test(atoi("   1004"), ft_atoi("   1004"), t++);
+	printf("%d | %d\n", atoi("   1004"), ft_atoi("   1004"));
+	TestResultCount += simple_test(atoi("   004"), ft_atoi("   004"), t++);
+	printf("%d | %d\n", atoi("   004"), ft_atoi("   004"));
+	TestResultCount += simple_test(atoi("   -1004"), ft_atoi("   -1004"), t++);
+	printf("%d | %d\n", atoi("   -1004"), ft_atoi("   -1004"));
+	TestResultCount += simple_test(atoi("   -004"), ft_atoi("   -004"), t++);
+	printf("%d | %d\n", atoi("   -004"), ft_atoi("   -004"));
+	TestResultCount += simple_test(atoi("   +1004"), ft_atoi("   +1004"), t++);
+	printf("%d | %d\n", atoi("   +1004"), ft_atoi("   +1004"));
+	TestResultCount += simple_test(atoi("   +004"), ft_atoi("   +004"), t++);
+	printf("%d | %d\n", atoi("   +004"), ft_atoi("   +004"));
+	TestResultCount += simple_test(atoi("   ++1004"), ft_atoi("   ++1004"), t++);
+	printf("%d | %d\n", atoi("   ++1004"), ft_atoi("   ++1004"));
+	TestResultCount += simple_test(atoi("   ++004"), ft_atoi("   ++004"), t++);
+	printf("%d | %d\n", atoi("   ++004"), ft_atoi("   ++004"));
+	TestResultCount += simple_test(atoi("   --1004"), ft_atoi("   --1004"), t++);
+	printf("%d | %d\n", atoi("   --1004"), ft_atoi("   --1004"));
+	TestResultCount += simple_test(atoi("   --004"), ft_atoi("   --004"), t++);
+	printf("%d | %d\n", atoi("   --004"), ft_atoi("   --004"));
+	TestResultCount += simple_test(atoi("   0"), ft_atoi("   0"), t++);
+	printf("%d | %d\n", atoi("   0"), ft_atoi("   0"));
+	TestResultCount += simple_test(atoi(" \t\n\v\f\r -1004"), ft_atoi(" \t\n\v\f\r -1004"), t++);
+	printf("%d | %d\n", atoi(" \t\n\v\f\r -1004"), ft_atoi(" \t\n\v\f\r -1004"));
+	TestResultCount += simple_test(atoi("   +-4"), ft_atoi("   +-4"), t++);
+	printf("%d | %d\n", atoi("   +-4"), ft_atoi("   +-4"));
+	TestResultCount += simple_test(atoi("0"), ft_atoi("0"), t++);
+	printf("%d | %d\n", atoi("0"), ft_atoi("0"));
+	TestResultCount += simple_test(atoi(""), ft_atoi(""), t++);
+	printf("%d | %d\n", atoi(""), ft_atoi(""));
+	TestResultCount += simple_test(atoi("-2147483648"), ft_atoi("-2147483648"), t++);
+	printf("%d | %d\n", atoi("-2147483648"), ft_atoi("-2147483648"));
+	TestResultCount += simple_test(atoi("2147483647"), ft_atoi("2147483647"), t++);
+	printf("%d | %d\n", atoi("2147483647"), ft_atoi("2147483647"));
+	TestResultCount += simple_test(atoi("   \r -2147483649"), ft_atoi("   \r -2147483649"), t++);
+	printf("%d | %d\n", atoi("   \r -2147483649"), ft_atoi("   \r -2147483649"));
+	TestResultCount += simple_test(atoi("   -444 12"), ft_atoi("   -444 12"), t++);
+	printf("%d | %d\n", atoi("   -444 12"), ft_atoi("   -444 12"));
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
