@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/24 16:52:39 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/24 17:22:31 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int		main(int argc, char *argv[])
 		strcpy(candidate, argv[1]);
 
 
-
 	#define FCNAME "TEST PROGRAM"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
 	printf("Testprogram: "); TestResultCount += test(str1, str2, 0, t++, _STR);	
@@ -97,8 +96,8 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	//if (check != 0)
-	//  return(0);
+	if (check != 0)
+	  return(0);
 	printf("\n\nOK, THERE WE GO!...");
 	while (countdown > 0)
 	{
@@ -793,12 +792,28 @@ int		main(int argc, char *argv[])
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
 	TestResultCount += test(strnstr(str1, "[zero this out]", sizeof(str1)),\
 	 ft_strnstr(str1, "[zero this out]", sizeof(str1)), 0, t++, _STR);
-	printf("%s\n%s\n", strnstr(str1, "[zero this out]", sizeof(str1)),\
+	printf("OR: %s\nFT: %s\n", strnstr(str1, "[zero this out]", sizeof(str1)),\
 	 ft_strnstr(str1, "[zero this out]", sizeof(str1)));
 	TestResultCount += test(strnstr(str1, "", sizeof(str1)),\
 	 ft_strnstr(str1, "", sizeof(str1)), 0, t++, _STR);
-	printf("%s\n%s\n", strnstr(str1, "", sizeof(str1)),\
+	printf("OR: %s\nFT: %s\n", strnstr(str1, "", sizeof(str1)),\
 	 ft_strnstr(str1, "", sizeof(str1)));
+	TestResultCount += test(strnstr("", "", sizeof(str1)),\
+	 ft_strnstr("", "", sizeof(str1)), 0, t++, _VAL);
+	printf("OR: %s\nFT: %s\n", strnstr("", "", sizeof(str1)),\
+	 ft_strnstr("", "", sizeof(str1)));
+	TestResultCount += test(strnstr(str1, "[zero this out]", sizeof(str1) - 20),\
+	 ft_strnstr(str1, "[zero this out]", sizeof(str1) - 20), 0, t++, _VAL);
+	printf("OR: %s\nFT: %s\n", strnstr(str1, "[zero this out]", sizeof(str1) - 20),\
+	 ft_strnstr(str1, "[zero this out]", sizeof(str1) - 20));
+	TestResultCount += test(strnstr(str1, "[zero this out]", sizeof(str1) - 19),\
+	 ft_strnstr(str1, "[zero this out]", sizeof(str1) - 19), 0, t++, _VAL);
+	printf("OR: %s\nFT: %s\n", strnstr(str1, "[zero this out]", sizeof(str1) - 19),\
+	 ft_strnstr(str1, "[zero this out]", sizeof(str1) - 19));
+	TestResultCount += test(strnstr(str1, "elc", sizeof(str1)),\
+	 ft_strnstr(str1, "elc", sizeof(str1)), 0, t++, _VAL);
+	printf("OR: %s\nFT: %s\n", strnstr(str1, "elc", sizeof(str1)),\
+	 ft_strnstr(str1, "elc", sizeof(str1)));
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
