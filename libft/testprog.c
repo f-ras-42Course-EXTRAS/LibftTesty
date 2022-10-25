@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/25 23:46:16 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/25 23:56:28 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -418,6 +418,7 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
+	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_strlcpy.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -432,92 +433,6 @@ int		main(int argc, char *argv[])
 	TestResultCount += test(str1, str2, 0, t++, _STR);
 	TestResultCount += simple_test(rtn7, rtn8, t++);
 	ResetStringsNArrays(str1, str2, orgs, arr1, arr2, orga, _STR);
-	check = ResultCheck(&TestResultCount, &LastCount);
-	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
-	#undef FCNAME
-
-	if (!g_speedmode) usleep(0.15*1000000);
-
-	#define FCNAME "ft_strlcat.c"
-	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	rtn7 = strlcat(str3, str1, sizeof(str3));
-	rtn8 = ft_strlcat(str4, str2, sizeof(str4));
-	TestResultCount += test(str3, str4, 0, t++, _STR);
-	TestResultCount += simple_test(rtn7, rtn8, t++);
-	printf("1: \n%s\n%s\n", str3, str4);
-	printf("1: \n%lu-%lu\n\n", rtn7, rtn8);
-	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
-	rtn7 = strlcat(str3, str1, (sizeof(str3) - 30));
-	rtn8 = ft_strlcat(str4, str2, (sizeof(str4) - 30));
-	TestResultCount += test(str3, str4, 0, t++, _STR);
-	TestResultCount += simple_test(rtn7, rtn8, t++);
-	printf("2: \n%s\n%s\n", str3, str4);
-	printf("2: \n%lu-%lu\n\n", rtn7, rtn8);
-	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
-	rtn7 = strlcat(str3, empty_str, sizeof(str3));
-	rtn8 = ft_strlcat(str4, empty_str, sizeof(str4));
-	TestResultCount += test(str3, str4, 0, t++, _STR);
-	TestResultCount += simple_test(rtn7, rtn8, t++);
-	printf("3: \n%s\n%s\n", str3, str4);
-	printf("3: \n%lu-%lu\n", rtn7, rtn8);
-	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
-	rtn7 = strlcat(str3, str1, 0);
-	rtn8 = ft_strlcat(str4, str2, 0);
-	TestResultCount += test(str3, str4, 0, t++, _STR);
-	TestResultCount += simple_test(rtn7, rtn8, t++);
-	printf("4: \n%s\n%s\n", str3, str4);
-	printf("4: \n%lu-%lu\n\n", rtn7, rtn8);
-	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
-	rtn7 = strlcat(str3, str1, 10);
-	rtn8 = ft_strlcat(str4, str2, 10);
-	TestResultCount += test(str3, str4, 0, t++, _STR);
-	TestResultCount += simple_test(rtn7, rtn8, t++);
-	printf("5: \n%s\n%s\n", str3, str4);
-	printf("5: \n%lu-%lu\n\n", rtn7, rtn8);
-	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
-	check = ResultCheck(&TestResultCount, &LastCount);
-	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
-	#undef FCNAME
-
-	if (!g_speedmode) usleep(0.15*1000000);
-
-	#define FCNAME "ft_strlcat.c"
-	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	rtn7 = strlcat(str3, str1, sizeof(str3));
-	rtn8 = ft_strlcat(str4, str2, sizeof(str4));
-	TestResultCount += test(str3, str4, 0, t++, _STR);
-	TestResultCount += simple_test(rtn7, rtn8, t++);
-	printf("1: \n%s\n%s\n", str3, str4);
-	printf("1: \n%lu-%lu\n\n", rtn7, rtn8);
-	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
-	rtn7 = strlcat(str3, str1, (sizeof(str3) - 30));
-	rtn8 = ft_strlcat(str4, str2, (sizeof(str4) - 30));
-	TestResultCount += test(str3, str4, 0, t++, _STR);
-	TestResultCount += simple_test(rtn7, rtn8, t++);
-	printf("2: \n%s\n%s\n", str3, str4);
-	printf("2: \n%lu-%lu\n\n", rtn7, rtn8);
-	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
-	rtn7 = strlcat(str3, empty_str, sizeof(str3));
-	rtn8 = ft_strlcat(str4, empty_str, sizeof(str4));
-	TestResultCount += test(str3, str4, 0, t++, _STR);
-	TestResultCount += simple_test(rtn7, rtn8, t++);
-	printf("3: \n%s\n%s\n", str3, str4);
-	printf("3: \n%lu-%lu\n", rtn7, rtn8);
-	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
-	rtn7 = strlcat(str3, str1, 0);
-	rtn8 = ft_strlcat(str4, str2, 0);
-	TestResultCount += test(str3, str4, 0, t++, _STR);
-	TestResultCount += simple_test(rtn7, rtn8, t++);
-	printf("4: \n%s\n%s\n", str3, str4);
-	printf("4: \n%lu-%lu\n\n", rtn7, rtn8);
-	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
-	rtn7 = strlcat(str3, str1, 10);
-	rtn8 = ft_strlcat(str4, str2, 10);
-	TestResultCount += test(str3, str4, 0, t++, _STR);
-	TestResultCount += simple_test(rtn7, rtn8, t++);
-	printf("5: \n%s\n%s\n", str3, str4);
-	printf("5: \n%lu-%lu\n\n", rtn7, rtn8);
-	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
@@ -697,7 +612,6 @@ int		main(int argc, char *argv[])
 	#undef FCNAME
 
 	if (!g_speedmode) usleep(0.15*1000000);
-
 
 	#define FCNAME "ft_strncmp.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
