@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/25 15:13:18 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/25 16:06:53 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ResetStringsNArrays(char *s1, char *s2, char *orgs,\
 							long *a1, long *a2, long *orga, int mode);
 
 int	g_speedmode = 0;
+int g_bonus = 1;
 
 int		main(int argc, char *argv[])
 {
@@ -86,7 +87,12 @@ int		main(int argc, char *argv[])
 		g_speedmode = 1;
 		argc = 1;
 	}
-	else if (argc == 2)
+	if (argc == 2 && strcmp(argv[1], "NOBONUS") == 0)
+	{
+		g_bonus = 0;
+		argc = 1;
+	}
+	if (argc == 2)
 		strcpy(candidate, argv[1]);
 
 
@@ -863,10 +869,6 @@ int		main(int argc, char *argv[])
 	 ft_strnstr(str1, str1, sizeof(str1) + 1), 0, t++, _VAL);
 	printf("OR: %s\nFT: %s\n", strnstr(str1, str1, sizeof(str1) + 1),\
 	 ft_strnstr(str1, str1, sizeof(str1) + 1));
-	TestResultCount += test(strnstr("hallo", "a", 6),\
-	 ft_strnstr("hallo", "a", 6), 0, t++, _VAL);
-	printf("OR: %s\nFT: %s\n", strnstr("hallo", "a", 6),\
-	 ft_strnstr("hallo", "a", 6));
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
