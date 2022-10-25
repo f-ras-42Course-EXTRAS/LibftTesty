@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/25 16:06:53 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/25 19:50:57 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ int		main(int argc, char *argv[])
 	char orgsx[27 + 39] = "Let's concatenate!!!!!!!: ";
 	char str3[27 + 39] = "Let's concatenate!!!!!!!: ";
 	char str4[27 + 39] = "Let's concatenate!!!!!!!: ";
+
+	size_t	*ptr;
+	int	testerror = 0;
 	
 	char candidate[32];
 
@@ -87,13 +90,12 @@ int		main(int argc, char *argv[])
 		g_speedmode = 1;
 		argc = 1;
 	}
-	if (argc == 2 && strcmp(argv[1], "NOBONUS") == 0)
-	{
+	if (argc >= 2 && strcmp(argv[1], "NOBONUS") == 0)
 		g_bonus = 0;
-		argc = 1;
-	}
 	if (argc == 2)
 		strcpy(candidate, argv[1]);
+	if (argc == 3)
+		strcpy(candidate, argv[2]);
 
 
 	#define FCNAME "TEST PROGRAM"
@@ -918,6 +920,41 @@ int		main(int argc, char *argv[])
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_calloc.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	ptr = ft_calloc(42, sizeof(size_t));
+	if (!ptr)
+	{
+		simple_test(1, 0, t++);
+		testerror = 1;
+	}
+	else
+		simple_test(1, 1, t++);
+	if (ptr)
+	{
+		for (size_t i = 0; i < 42; i++)
+		{
+			if (ptr[i] != 0)
+			{
+				testerror = 1;
+				break;
+			}
+		}
+	}
+	if (testerror)
+		simple_test(1, 0, t++);
+	else
+		simple_test(1, 1, t++);
+	free(ptr);
+	ptr = NULL;
+	testerror = 0;
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
 
 	//--FINAL RESULTS--
 	ProjectResultMsg(argc, candidate, TestResultCount);
