@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/25 19:50:57 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/25 21:13:14 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,22 @@ int  zero_neg_pos_test(int input1, int input2, int testnum);
 int	ResultCheck(int *TestResultCount, int *LastCount);
 char	*TestResultMsg(int result);
 void	ProjectResultMsg(int ac, char *candidate, int result);
-void	ResetStringsNArrays(char *s1, char *s2, char *orgs,\
-							long *a1, long *a2, long *orga, int mode);
+void	ResetStringsNArrays(char *s1, char *s2, const char *orgs,\
+							long *a1, long *a2, const long *orga, int mode);
 
 int	g_speedmode = 0;
 int g_bonus = 1;
 
 int		main(int argc, char *argv[])
 {
-	char orgs[] = "Hello[zero this out] welcome to Codam.";
+	const char orgs[] = "Hello[zero this out] welcome to Codam.";
 	char str1[] = "Hello[zero this out] welcome to Codam.";
 	char str2[] = "Hello[zero this out] welcome to Codam.";
 
 	char rtn1[64];
 	char rtn2[64];
 	
-	long orga[12] = {0, 4294967254, -2147483648, 6983975, 444, 7,\
+	const long orga[12] = {0, 4294967254, -2147483648, 6983975, 444, 7,\
 						57, 123, -4875769, 111, 222, 333};
 	long arr1[12] = {0, 4294967254, -2147483648, 6983975, 444, 7,\
 						57, 123, -4875769, 111, 222, 333};
@@ -74,7 +74,8 @@ int		main(int argc, char *argv[])
 	char str3[27 + 39] = "Let's concatenate!!!!!!!: ";
 	char str4[27 + 39] = "Let's concatenate!!!!!!!: ";
 
-	size_t	*ptr;
+	size_t	*ptr1;
+	//size_t	*ptr2;
 	int	testerror = 0;
 	
 	char candidate[32];
@@ -926,19 +927,19 @@ int		main(int argc, char *argv[])
 	#define FCNAME "ft_calloc.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
 	check = ResultCheck(&TestResultCount, &LastCount);
-	ptr = ft_calloc(42, sizeof(size_t));
-	if (!ptr)
+	ptr1 = ft_calloc(42, sizeof(size_t));
+	if (!ptr1)
 	{
 		simple_test(1, 0, t++);
 		testerror = 1;
 	}
 	else
 		simple_test(1, 1, t++);
-	if (ptr)
+	if (ptr1)
 	{
 		for (size_t i = 0; i < 42; i++)
 		{
-			if (ptr[i] != 0)
+			if (ptr1[i] != 0)
 			{
 				testerror = 1;
 				break;
@@ -949,12 +950,59 @@ int		main(int argc, char *argv[])
 		simple_test(1, 0, t++);
 	else
 		simple_test(1, 1, t++);
-	free(ptr);
-	ptr = NULL;
+	free(ptr1);
+	ptr1 = NULL;
 	testerror = 0;
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_calloc.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	ptr1 = ft_calloc(444, sizeof(size_t));
+	if (!ptr1)
+	{
+		simple_test(1, 0, t++);
+		testerror = 1;
+	}
+	else
+		simple_test(1, 1, t++);
+	if (ptr1)
+	{
+		for (size_t i = 0; i < 444; i++)
+		{
+			if (ptr1[i] != 0)
+			{
+				testerror = 1;
+				break;
+			}
+		}
+	}
+	if (testerror)
+		simple_test(1, 0, t++);
+	else
+		simple_test(1, 1, t++);
+	free(ptr1);
+	ptr1 = NULL;
+	testerror = 0;
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_strdup.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	/*check = ResultCheck(&TestResultCount, &LastCount);
+	ptr1 = ft_strdup(str1);
+	ptr2 = strdup(str1);
+
+	free(ptr1);
+
+	ptr1 = NULL;
+	testerror = 0;*/
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 
 	//--FINAL RESULTS--
 	ProjectResultMsg(argc, candidate, TestResultCount);
@@ -1038,8 +1086,8 @@ int  zero_neg_pos_test(int input1, int input2, int testnum)
 }
 // -------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------
-void  ResetStringsNArrays(char *s1, char *s2, char *orgs,\
-							long *a1, long *a2, long *orga, int mode)
+void  ResetStringsNArrays(char *s1, char *s2, const char *orgs,\
+							long *a1, long *a2, const long *orga, int mode)
 {
 	if(mode == _BOTH)
 	{
