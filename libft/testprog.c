@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/25 23:26:25 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/25 23:46:16 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -919,49 +919,14 @@ int		main(int argc, char *argv[])
 
 	#define FCNAME "ft_calloc.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	check = ResultCheck(&TestResultCount, &LastCount);
-	ptr1 = ft_calloc(42, sizeof(size_t));
-	if (!ptr1)
-	{
-		simple_test(1, 0, t++);
-		testerror = 1;
-	}
-	else
-		simple_test(1, 1, t++);
-	if (ptr1)
-	{
-		for (size_t i = 0; i < 42; i++)
-		{
-			if (ptr1[i] != 0)
-			{
-				testerror = 1;
-				break;
-			}
-		}
-	}
-	if (testerror)
-		simple_test(1, 0, t++);
-	else
-		simple_test(1, 1, t++);
-	free(ptr1);
-	ptr1 = NULL;
-	testerror = 0;
-	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
-	#undef FCNAME
-
-	if (!g_speedmode) usleep(0.15*1000000);
-
-	#define FCNAME "ft_calloc.c"
-	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	check = ResultCheck(&TestResultCount, &LastCount);
 	ptr1 = ft_calloc(444, sizeof(size_t));
 	if (!ptr1)
 	{
-		simple_test(1, 0, t++);
+		TestResultCount += simple_test(1, 0, t++);
 		testerror = 1;
 	}
 	else
-		simple_test(1, 1, t++);
+		TestResultCount += simple_test(1, 1, t++);
 	if (ptr1)
 	{
 		for (size_t i = 0; i < 444; i++)
@@ -974,12 +939,13 @@ int		main(int argc, char *argv[])
 		}
 	}
 	if (testerror)
-		simple_test(1, 0, t++);
+		TestResultCount += simple_test(1, 0, t++);
 	else
-		simple_test(1, 1, t++);
+		TestResultCount += simple_test(1, 1, t++);
 	free(ptr1);
 	ptr1 = NULL;
 	testerror = 0;
+	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
@@ -987,12 +953,11 @@ int		main(int argc, char *argv[])
 
 	#define FCNAME "ft_strdup.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	check = ResultCheck(&TestResultCount, &LastCount);
 	ptr2 = ft_strdup(orgs);
 	ptr3 = strdup(orgs);
-	test(ptr2, ptr3, 0, t++, _STR);
+	TestResultCount += test(ptr2, ptr3, 0, t++, _STR);
 	ResetDoublePointer(ptr2, ptr3);
-	testerror = 0;
+	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 
 	//--FINAL RESULTS--
