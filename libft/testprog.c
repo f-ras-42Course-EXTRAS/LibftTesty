@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/26 00:03:47 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/26 00:05:35 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int		main(int argc, char *argv[])
 	#define FCNAME "TEST PROGRAM"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
 	printf("Testprogram: "); TestResultCount += test(str1, str2, 0, t++, _STR);	
-	printf("\n%s\n%s\n\n", str1, str2);                  					                //test start
+	printf("\n%s\n%s\n\n", str1, str2);                  					        //test start
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
@@ -117,10 +117,10 @@ int		main(int argc, char *argv[])
 	
 	#define FCNAME "ft_memset.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	strncpy(rtn1, memset(str1 + 5, '0', 15 * (sizeof(char))), sizeof(orgs));      //function call + save return
-	strncpy(rtn2, ft_memset(str2 + 5, '0', 15 * (sizeof(char))), sizeof(orgs));   //function call	+ save return
-	TestResultCount += test(rtn1, rtn2, 0, t++, _STR);                         //test return value
-	TestResultCount += test(str1, str2, 0, t++, _STR);						              //test after call
+	strncpy(rtn1, memset(str1 + 5, '0', 15 * (sizeof(char))), sizeof(orgs));      	//function call + save return
+	strncpy(rtn2, ft_memset(str2 + 5, '0', 15 * (sizeof(char))), sizeof(orgs));   	//function call	+ save return
+	TestResultCount += test(rtn1, rtn2, 0, t++, _STR);                         		//test return value
+	TestResultCount += test(str1, str2, 0, t++, _STR);						        //test after call
 	printf("\n%s\n%s\n", str1, str2);
 	printf("\n%s\n%s\n", rtn1, rtn2);
 	memset(arr1, -1, sizeof(orga));
