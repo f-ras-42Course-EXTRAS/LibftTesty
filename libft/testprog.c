@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/25 21:13:14 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/25 23:26:25 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*TestResultMsg(int result);
 void	ProjectResultMsg(int ac, char *candidate, int result);
 void	ResetStringsNArrays(char *s1, char *s2, const char *orgs,\
 							long *a1, long *a2, const long *orga, int mode);
+void	ResetDoublePointer(void *p1, void *p2);
+void	StartCountdown (int countdowntimer);
 
 int	g_speedmode = 0;
 int g_bonus = 1;
@@ -75,7 +77,8 @@ int		main(int argc, char *argv[])
 	char str4[27 + 39] = "Let's concatenate!!!!!!!: ";
 
 	size_t	*ptr1;
-	//size_t	*ptr2;
+	char	*ptr2;
+	char	*ptr3;
 	int	testerror = 0;
 	
 	char candidate[32];
@@ -84,7 +87,7 @@ int		main(int argc, char *argv[])
 	int LastCount = 0;
 	int check = 0;
 	int t = 0;
-	int countdown = 3;
+	int countdowntimer = 10;
 
 	if (argc == 2 && strcmp(argv[1], "SPEEDMODE") == 0)
 	{
@@ -109,17 +112,7 @@ int		main(int argc, char *argv[])
 
 	if (check != 0)
 	  return(0);
-	printf("\n\nOK, THERE WE GO!...");
-	while (countdown > 0)
-	{
-		printf("{%d}", countdown--);
-		fflush(stdout);
-		if (!g_speedmode) usleep(0.5*1000000);
-		printf("\b\b\b");
-	}
-	printf("   ");
-	fflush(stdout);
-	if (!g_speedmode) usleep(0.15*1000000);
+	StartCountdown(countdowntimer);
 	printf("\n\n");
 	
 	#define FCNAME "ft_memset.c"
@@ -994,14 +987,12 @@ int		main(int argc, char *argv[])
 
 	#define FCNAME "ft_strdup.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	/*check = ResultCheck(&TestResultCount, &LastCount);
-	ptr1 = ft_strdup(str1);
-	ptr2 = strdup(str1);
-
-	free(ptr1);
-
-	ptr1 = NULL;
-	testerror = 0;*/
+	check = ResultCheck(&TestResultCount, &LastCount);
+	ptr2 = ft_strdup(orgs);
+	ptr3 = strdup(orgs);
+	test(ptr2, ptr3, 0, t++, _STR);
+	ResetDoublePointer(ptr2, ptr3);
+	testerror = 0;
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 
 	//--FINAL RESULTS--
@@ -1109,6 +1100,15 @@ void  ResetStringsNArrays(char *s1, char *s2, const char *orgs,\
 }
 // -------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------
+void	ResetDoublePointer(void *p1, void *p2)
+{
+	free(p1);
+	free(p2);
+	p1 = NULL;
+	p2 = NULL;
+}
+// -------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
 int   ResultCheck(int *TestResultCount, int *LastCount)
 {
 	if(*TestResultCount != *LastCount)
@@ -1154,4 +1154,60 @@ void	ProjectResultMsg(int ac, char *candidate, int result)
 							" Let's see where it went wrong!\n\n"
 							, result);
 		}
+}
+// -------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
+void	StartCountdown(int countdowntimer)
+{
+	printf("\n\nOK, THERE WE GO!... Are you ready??\n\n\n\n");
+	while (countdowntimer > 9)
+	{
+		printf(_COLOR_RESET"\e[1m   «  _____ %d _____  »  \n\n\n\n", countdowntimer);
+		countdowntimer--;
+		fflush(stdout);
+		if (!g_speedmode) usleep(1*1000000);
+		//printf("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
+		//printf("\r");
+		printf("\e[4A");
+	}
+	while (countdowntimer > 3)
+	{
+		printf(_COLOR_RESET"\e[1m   «  _____ %d _____  »   \n\n\n\n", countdowntimer);
+		countdowntimer--;
+		fflush(stdout);
+		if (!g_speedmode) usleep(1*1000000);
+		//printf("\r");
+		printf("\e[4A");
+	}
+	while (countdowntimer > 2)
+	{
+		printf(_COLOR_RESET"\e[1;3%dm   «  _____ %d _____  »   \n\n\n\n", countdowntimer, countdowntimer);
+		countdowntimer--;
+		fflush(stdout);
+		if (!g_speedmode) usleep(1*1000000);
+		//printf("\r");
+		printf("\e[4A");
+	}
+	while (countdowntimer > 1)
+	{
+		printf(_COLOR_RESET"\e[1;3%dm   «        %d        »   \n\n\n\n", countdowntimer, countdowntimer);
+		countdowntimer--;
+		fflush(stdout);
+		if (!g_speedmode) usleep(1*1000000);
+		//printf("\r");
+		printf("\e[4A");
+	}
+	while (countdowntimer > 0)
+	{
+		printf(_COLOR_RESET"\e[1;3%dm            %d            \n\n\n\n", countdowntimer, countdowntimer);
+		countdowntimer--;
+		fflush(stdout);
+		if (!g_speedmode) usleep(1*1000000);
+		//printf("\r");
+		printf("\e[4A");
+	}
+	printf("\e[K\n\n\n\n");
+	fflush(stdout);
+	if (!g_speedmode) usleep(0.15*1000000);
+	printf(_COLOR_RESET);
 }
