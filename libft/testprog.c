@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/24 23:46:13 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/25 13:48:36 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		main(int argc, char *argv[])
 
 	size_t				rtn7;
 	size_t				rtn8;
-
+	
 	char empty_str[] = "";
 
 	char orgsx[27 + 39] = "Let's concatenate!!!!!!!: ";
@@ -745,6 +745,15 @@ int		main(int argc, char *argv[])
 	TestResultCount +=\
 	 test(memchr(arr5, -1, sizeof(arr5)), ft_memchr(arr5, -1, sizeof(arr5)),\
 	  sizeof(arr5), t++,  _VAL);
+	TestResultCount +=\
+	 test(memchr(str1, 'l', 2), ft_memchr(str1, 'l', 2),\
+	  0, t++,  _VAL);
+	TestResultCount +=\
+	 test(memchr("", '[', 0), ft_memchr("", '[', 0),\
+	  0, t++,  _VAL);
+	TestResultCount +=\
+	 test(memchr(str1, 'h', 0), ft_memchr(str1, 'h', 0),\
+	  0, t++,  _VAL);
 	memchr(arr5, -1, sizeof(arr5));
 	printf("%s || %s\n",\
 	 memchr(str1, 'x', sizeof(str1)), ft_memchr(str1, 'x', sizeof(str1)));
@@ -770,6 +779,12 @@ int		main(int argc, char *argv[])
 	 memchr("1\200\0002", '\200', 5), ft_memchr("1\200\0002", '\200', 5));
 	printf("%p || %p\n",\
 	 memchr(arr5, -1, sizeof(arr5)), ft_memchr(arr5, -1, sizeof(arr5)));
+	printf("%s || %s\n",\
+	 memchr("", 'l', 2), ft_memchr(str1, 'l', 2));
+	printf("%p || %p\n",\
+	 memchr("", 'l', 0), ft_memchr("", 'l', 0));
+	printf("%p || %p\n",\
+	 memchr(str1, 'h', 0), ft_memchr(str1, 'h', 0));
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
@@ -935,7 +950,9 @@ int		test(void *input1, void *input2, int len, int testnum, int mode)
 {
 	if (mode == _STR)
 	{
-		if(strcmp(input1, input2) == 0)
+		if (!input1 || !input2)
+			return (simple_test((int)input1, (int)input2, testnum));
+		else if(strcmp(input1, input2) == 0)
 		{
 			printf(_GREEN "TEST%d VALID\n" _COLOR_RESET, testnum);
 			if (!g_speedmode) usleep(0.075*1000000);
@@ -964,20 +981,7 @@ int		test(void *input1, void *input2, int len, int testnum, int mode)
 		}
 	}
 	if(mode == _VAL)
-	{
-		if(input1 == input2)
-		{
-			printf(_GREEN "TEST%d VALID\n" _COLOR_RESET, testnum);
-			if (!g_speedmode) usleep(0.075*1000000);
-			return(0);
-		}
-		else
-		{
-			printf(_RED "TEST%d FAILED\n" _COLOR_RESET, testnum);	
-			if (!g_speedmode) usleep(0.075*1000000);
-			return(1);
-		}
-	}
+		return (simple_test((int)input1, (int)input2, testnum));
 	return (-1);
 }
 // -------------------------------------------------------------------------------------
