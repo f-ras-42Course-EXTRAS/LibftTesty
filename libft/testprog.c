@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/25 23:56:28 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/26 00:03:47 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1045,8 +1045,6 @@ void	StartCountdown(int countdowntimer)
 		countdowntimer--;
 		fflush(stdout);
 		if (!g_speedmode) usleep(1*1000000);
-		//printf("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
-		//printf("\r");
 		printf("\e[4A");
 	}
 	while (countdowntimer > 3)
@@ -1055,7 +1053,6 @@ void	StartCountdown(int countdowntimer)
 		countdowntimer--;
 		fflush(stdout);
 		if (!g_speedmode) usleep(1*1000000);
-		//printf("\r");
 		printf("\e[4A");
 	}
 	while (countdowntimer > 2)
@@ -1064,7 +1061,6 @@ void	StartCountdown(int countdowntimer)
 		countdowntimer--;
 		fflush(stdout);
 		if (!g_speedmode) usleep(1*1000000);
-		//printf("\r");
 		printf("\e[4A");
 	}
 	while (countdowntimer > 1)
@@ -1073,7 +1069,6 @@ void	StartCountdown(int countdowntimer)
 		countdowntimer--;
 		fflush(stdout);
 		if (!g_speedmode) usleep(1*1000000);
-		//printf("\r");
 		printf("\e[4A");
 	}
 	while (countdowntimer > 0)
@@ -1082,7 +1077,6 @@ void	StartCountdown(int countdowntimer)
 		countdowntimer--;
 		fflush(stdout);
 		if (!g_speedmode) usleep(1*1000000);
-		//printf("\r");
 		printf("\e[4A");
 	}
 	printf("\e[K\n\n\n\n");
