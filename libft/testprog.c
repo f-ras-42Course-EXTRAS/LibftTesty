@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/25 14:15:43 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/25 14:18:56 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -672,6 +672,8 @@ int		main(int argc, char *argv[])
 	 _VAL);
 	TestResultCount += test(strrchr(str1, 'e'), ft_strrchr(str1, 'e'), 0, t++, \
 	_STR);
+	TestResultCount += test(strrchr(str1, 357), ft_strrchr(str1, 357), 0, t++, \
+	_STR);
 	TestResultCount += test(strrchr(str1, '\0'), ft_strrchr(str1, '\0'), 0, t++, \
 	_VAL);
 	TestResultCount +=\
@@ -680,6 +682,7 @@ int		main(int argc, char *argv[])
 	printf("%s || %s\n", strrchr(str1, 'x'), ft_strrchr(str1, 'x'));
 	printf("%p || %p\n", strrchr(str1, 'x'), ft_strrchr(str1, 'x'));
 	printf("%s || %s\n", strrchr(str1, 'e'), ft_strrchr(str1, 'e'));
+	printf("%s || %s\n", strrchr(str1, 357), ft_strrchr(str1, 357));
 	printf("%s || %s\n", strrchr(str1, '\0'), ft_strrchr(str1, '\0'));
 	printf("%p || %p\n", strrchr(str1, '\0'), ft_strrchr(str1, '\0'));
 	printf("%s || %s\n",\
