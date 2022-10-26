@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/26 02:37:36 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/26 02:49:34 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -864,6 +864,10 @@ int		main(int argc, char *argv[])
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
 	ptr2 = ft_strdup(orgs);
 	ptr3 = strdup(orgs);
+	TestResultCount += test(ptr2, ptr3, 0, t++, _STR);
+	ResetDoublePointer(ptr2, ptr3);
+	ptr2 = ft_strdup("");
+	ptr3 = strdup("");
 	TestResultCount += test(ptr2, ptr3, 0, t++, _STR);
 	ResetDoublePointer(ptr2, ptr3);
 	check = ResultCheck(&TestResultCount, &LastCount);
