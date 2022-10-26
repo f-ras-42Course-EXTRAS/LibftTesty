@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/26 10:35:39 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/26 12:08:28 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -878,11 +878,6 @@ int		main(int argc, char *argv[])
 
 	#define FCNAME "ft_substr.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	// ptr2 = ft_substr("", 0, 1);
-	// TestResultCount += simple_test(*ptr2, '\0', t++);
-	// printf("%d", *ptr2, 0);
-	// free(ptr2);
-	// ptr2 = NULL;
 	ptr2 = ft_substr(orgs, 0, strlen(orgs));
 	TestResultCount += test((char *)orgs, ptr2, 0, t++, _STR);
 	printf("E: %s\nY: %s\n", orgs, ptr2);
@@ -951,6 +946,34 @@ int		main(int argc, char *argv[])
 	ptr2 = ft_substr("heya", 5, 2);
 	TestResultCount += test("", ptr2, 0, t++, _STR);
 	printf("E: %s\nY: %s\n", "", ptr2);
+	free(ptr2);
+	ptr2 = NULL;
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_joinstr.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	ptr2 = ft_strjoin("Hello", "Hello");
+	TestResultCount += test("HelloHello", ptr2, 0, t++, _STR);
+	printf("E: %s\nY: %s\n","HelloHello", ptr2);
+	free(ptr2);
+	ptr2 = NULL;
+	ptr2 = ft_strjoin(str1, "");
+	TestResultCount += test(str1, ptr2, 0, t++, _STR);
+	printf("E: %s\nY: %s\n",str1, ptr2);
+	free(ptr2);
+	ptr2 = NULL;
+	ptr2 = ft_strjoin("", str2);
+	TestResultCount += test(str2, ptr2, 0, t++, _STR);
+	printf("E: %s\nY: %s\n", str2, ptr2);
+	free(ptr2);
+	ptr2 = NULL;
+	ptr2 = ft_strjoin("", "");
+	TestResultCount += test(empty_str, ptr2, 0, t++, _STR);
+	printf("E: %s\nY: %s\n", empty_str, ptr2);
 	free(ptr2);
 	ptr2 = NULL;
 	check = ResultCheck(&TestResultCount, &LastCount);
