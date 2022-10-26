@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/26 00:05:35 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/26 02:37:36 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	ResetDoublePointer(void *p1, void *p2);
 void	StartCountdown (int countdowntimer);
 
 int	g_speedmode = 0;
-int g_bonus = 1;
 
 int		main(int argc, char *argv[])
 {
@@ -94,12 +93,8 @@ int		main(int argc, char *argv[])
 		g_speedmode = 1;
 		argc = 1;
 	}
-	if (argc >= 2 && strcmp(argv[1], "NOBONUS") == 0)
-		g_bonus = 0;
 	if (argc == 2)
 		strcpy(candidate, argv[1]);
-	if (argc == 3)
-		strcpy(candidate, argv[2]);
 
 
 	#define FCNAME "TEST PROGRAM"
