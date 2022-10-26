@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/26 09:19:55 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/26 10:35:39 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1104,7 +1104,7 @@ void	StartCountdown(int countdowntimer)
 		if (!g_speedmode) usleep(1*1000000);
 		printf("\e[4A");
 	}
-	while (countdowntimer > 3)
+	while (countdowntimer > 5)
 	{
 		printf(_COLOR_RESET"\e[1m   «  _____ %d _____  »   \n\n\n\n", countdowntimer);
 		countdowntimer--;
@@ -1112,31 +1112,47 @@ void	StartCountdown(int countdowntimer)
 		if (!g_speedmode) usleep(1*1000000);
 		printf("\e[4A");
 	}
-	while (countdowntimer > 2)
+	while (countdowntimer > 3)
 	{
-		printf(_COLOR_RESET"\e[1;3%dm   «  _____ %d _____  »   \n\n\n\n", countdowntimer, countdowntimer);
+		printf(_COLOR_RESET"\e[1m   «  _____ %d _____  »   \n\n\n\n", countdowntimer);
 		countdowntimer--;
 		fflush(stdout);
 		if (!g_speedmode) usleep(1*1000000);
 		printf("\e[4A");
+		printf("\e[K");
+		printf("\e[1B");
+	}
+	while (countdowntimer > 2)
+	{
+		printf(_COLOR_RESET"\e[1;3%dm\n   «  _____ %d _____  »   \n\n\n\n", countdowntimer, countdowntimer);
+		countdowntimer--;
+		fflush(stdout);
+		if (!g_speedmode) usleep(1*1000000);
+		printf("\e[3A");
 	}
 	while (countdowntimer > 1)
 	{
-		printf(_COLOR_RESET"\e[1;3%dm   «        %d        »   \n\n\n\n", countdowntimer, countdowntimer);
+		printf(_COLOR_RESET"\e[1;3%dm\n   «        %d        »   \n\n\n\n", countdowntimer, countdowntimer);
 		countdowntimer--;
 		fflush(stdout);
 		if (!g_speedmode) usleep(1*1000000);
-		printf("\e[4A");
+		printf("\e[2A");
 	}
 	while (countdowntimer > 0)
 	{
-		printf(_COLOR_RESET"\e[1;3%dm            %d            \n\n\n\n", countdowntimer, countdowntimer);
+		printf(_COLOR_RESET"\e[1;3%dm\n            %d            \n\n\n\n", countdowntimer, countdowntimer);
 		countdowntimer--;
 		fflush(stdout);
-		if (!g_speedmode) usleep(1*1000000);
-		printf("\e[4A");
+		if (!g_speedmode) usleep(0.25*1000000);
+		printf("\e[1A");
 	}
-	printf("\e[K\n\n\n\n");
+	for (size_t i = 0; i < 75; i++)
+	{
+		printf("¨");
+		fflush(stdout);
+		if (!g_speedmode) usleep(0.01*1000000);
+	}
+	printf("TAKE OFF!\n\n\n\n");
 	fflush(stdout);
 	if (!g_speedmode) usleep(0.15*1000000);
 	printf(_COLOR_RESET);
