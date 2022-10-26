@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/26 12:08:28 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/27 01:05:57 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -978,6 +978,56 @@ int		main(int argc, char *argv[])
 	ptr2 = NULL;
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "TEST.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	ptr2 = ft_strtrim("xxyyaaayxz  hello x ,,  zx  xx z", "z yax");
+	TestResultCount += test("hello x ,,", ptr2, 0, t++, _STR);
+	printf("E: %s\nY: %s\n", "hello x ,,", ptr2);
+	free(ptr2);
+	ptr2 = NULL;
+	ptr2 = ft_strtrim("xxyyaaayxz  hello x ,,  zx  xx z", "");
+	TestResultCount += test("xxyyaaayxz  hello x ,,  zx  xx z", ptr2, 0, t++, _STR);
+	printf("E: %s\nY: %s\n", "xxyyaaayxz  hello x ,,  zx  xx z", ptr2);
+	free(ptr2);
+	ptr2 = NULL;
+	ptr2 = ft_strtrim("", "");
+	TestResultCount += test("", ptr2, 0, t++, _STR);
+	printf("E: %s\nY: %s\n", "", ptr2);
+	free(ptr2);
+	ptr2 = NULL;
+	ptr2 = ft_strtrim("1", "1");
+	TestResultCount += test("", ptr2, 0, t++, _STR);
+	printf("E: %s\nY: %s\n", "", ptr2);
+	free(ptr2);
+	ptr2 = NULL;
+	ptr2 = ft_strtrim("1", "");
+	TestResultCount += test("1", ptr2, 0, t++, _STR);
+	printf("E: %s\nY: %s\n", "1", ptr2);
+	free(ptr2);
+	ptr2 = NULL;
+	ptr2 = ft_strtrim("12", "12");
+	TestResultCount += test("", ptr2, 0, t++, _STR);
+	printf("E: %s\nY: %s\n", "", ptr2);
+	free(ptr2);
+	ptr2 = NULL;
+	ptr2 = ft_strtrim("12", "12");
+	TestResultCount += test("", ptr2, 0, t++, _STR);
+	printf("E: %s\nY: %s\n", "", ptr2);
+	free(ptr2);
+	ptr2 = NULL;
+	ptr2 = ft_strtrim("xxyyaaayxz    zx  xx zhello x ,,", "z yax");
+	TestResultCount += test("hello x ,,", ptr2, 0, t++, _STR);
+	printf("E: %s\nY: %s\n", "hello x ,,", ptr2);
+	ptr2 = ft_strtrim("hello x ,,xxyyaaayxz    zx  xx z", "z yax");
+	TestResultCount += test("hello x ,,", ptr2, 0, t++, _STR);
+	printf("E: %s\nY: %s\n", "hello x ,,", ptr2);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
 
 	//--FINAL RESULTS--
 	ProjectResultMsg(argc, candidate, TestResultCount);
