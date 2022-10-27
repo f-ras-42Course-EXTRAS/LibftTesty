@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/27 01:05:57 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/27 13:24:52 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -982,7 +982,7 @@ int		main(int argc, char *argv[])
 
 	if (!g_speedmode) usleep(0.15*1000000);
 
-	#define FCNAME "TEST.c"
+	#define FCNAME "ft_strtrim.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
 	ptr2 = ft_strtrim("xxyyaaayxz  hello x ,,  zx  xx z", "z yax");
 	TestResultCount += test("hello x ,,", ptr2, 0, t++, _STR);
@@ -1027,7 +1027,25 @@ int		main(int argc, char *argv[])
 	printf("E: %s\nY: %s\n", "hello x ,,", ptr2);
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
-	#undef FCNAME
+	#undef FCNAME;
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_split.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME;
+
+	// if (!g_speedmode) usleep(0.15*1000000);
+
+	// #define FCNAME "TEST.c"
+	// printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	// // Insert values
+	// check = ResultCheck(&TestResultCount, &LastCount);
+	// printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	// #undef FCNAME;
 
 	//--FINAL RESULTS--
 	ProjectResultMsg(argc, candidate, TestResultCount);
