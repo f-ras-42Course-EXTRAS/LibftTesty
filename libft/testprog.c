@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/28 04:56:30 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/28 04:59:45 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1243,7 +1243,7 @@ void	StartCountdown(int countdowntimer)
 		fflush(stdout);
 		if (!g_speedmode) usleep(0.01*1000000);
 	}
-	printf("TAKE OFF!\n\n\n\n");
+	printf("LIFTOFF!\n\n\n\n");
 	fflush(stdout);
 	if (!g_speedmode) usleep(0.15*1000000);
 	printf(_COLOR_RESET);
