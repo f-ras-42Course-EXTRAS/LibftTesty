@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/27 13:24:52 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/28 04:56:30 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1027,7 +1027,7 @@ int		main(int argc, char *argv[])
 	printf("E: %s\nY: %s\n", "hello x ,,", ptr2);
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
-	#undef FCNAME;
+	#undef FCNAME
 
 	if (!g_speedmode) usleep(0.15*1000000);
 
@@ -1036,7 +1036,7 @@ int		main(int argc, char *argv[])
 	
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
-	#undef FCNAME;
+	#undef FCNAME
 
 	// if (!g_speedmode) usleep(0.15*1000000);
 
