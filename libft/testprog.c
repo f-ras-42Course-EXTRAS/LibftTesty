@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/28 04:59:45 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/28 18:00:15 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 #define _COLOR_RESET	"\e[0m"
 
 
-int	test(void *input1, void *input2, int len, int testnum, int mode);
-int	simple_test(int input1, int input2, int testnum);
-int  zero_neg_pos_test(int input1, int input2, int testnum);
-int	ResultCheck(int *TestResultCount, int *LastCount);
+int		test(void *input1, void *input2, int len, int testnum, int mode);
+int		simple_test(int input1, int input2, int testnum);
+int  	zero_neg_pos_test(int input1, int input2, int testnum);
+int		ResultCheck(int *TestResultCount, int *LastCount);
 char	*TestResultMsg(int result);
 void	ProjectResultMsg(int ac, char *candidate, int result);
 void	ResetStringsNArrays(char *s1, char *s2, const char *orgs,\
@@ -1237,13 +1237,32 @@ void	StartCountdown(int countdowntimer)
 		if (!g_speedmode) usleep(0.25*1000000);
 		printf("\e[1A");
 	}
-	for (size_t i = 0; i < 75; i++)
+	for (size_t i = 0; i < 50; i++)
 	{
 		printf("¨");
 		fflush(stdout);
 		if (!g_speedmode) usleep(0.01*1000000);
 	}
 	printf("LIFTOFF!\n\n\n\n");
+	fflush(stdout);
+	if (!g_speedmode) usleep(0.2*1000000);
+	for (size_t i = 0; i < 11; i++)
+	{
+		printf("\e[4A");
+		if (countdowntimer == 0)
+			printf("\e[1;3%dm", countdowntimer += 1);
+		else if (countdowntimer == 1)
+			printf("\e[1;3%dm", countdowntimer += 2);
+		else
+			printf("\e[1;3%dm", countdowntimer -= 2);
+		for (size_t i = 0; i < 50; i++)
+			{
+				printf("¨");
+			}
+		printf("LIFTOFF!\n\n\n\n");
+		fflush(stdout);
+		if (!g_speedmode) usleep(0.05*1000000);
+	}
 	fflush(stdout);
 	if (!g_speedmode) usleep(0.15*1000000);
 	printf(_COLOR_RESET);
