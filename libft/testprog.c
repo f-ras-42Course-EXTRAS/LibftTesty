@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/31 16:57:31 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/31 20:37:26 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -774,6 +774,10 @@ int		main(int argc, char *argv[])
 	 ft_strnstr(str1, str1, sizeof(str1) + 1), 0, t++, _VAL);
 	printf("OR: %s\nFT: %s\n", strnstr(str1, str1, sizeof(str1) + 1),\
 	 ft_strnstr(str1, str1, sizeof(str1) + 1));
+	TestResultCount += test(strnstr("Weeeelcome", "elc", 100),\
+	 ft_strnstr("Weeeelcome", "elc", 100), 0, t++, _STR);
+	printf("OR: %s\nFT: %s\n", strnstr("Weeeelcome", "elc", 100),\
+	 ft_strnstr("Weeeelcome", "elc", 100));
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
@@ -1067,29 +1071,12 @@ int		main(int argc, char *argv[])
 	for (size_t i = 0; i < 4; i++)
 		free(splitsing[i]);
 	free(splitsing);
-	splitsing = ft_split("....It.....is......me....!.....Open.....up....", '.');
-	for (size_t i = 0; i < 7; i++)
-		printf("%s\n", splitsing[i]);
-	for (size_t i = 0; i < 7; i++)
-		free(splitsing[i]);
-	free(splitsing);
-	splitsing = ft_split("Hallo1", ' ');
-	for (size_t i = 0; i < 1; i++)
-		printf("%s\n", splitsing[i]);
-	for (size_t i = 0; i < 1; i++)
-		free(splitsing[i]);
-	free(splitsing);
-	splitsing = ft_split("", 'z');
-	for (size_t i = 0; i < 1; i++)
-		printf("%s\n", splitsing[i]);
-	for (size_t i = 0; i < 1; i++)
-		free(splitsing[i]);
-	free(splitsing);
-	splitsing = ft_split("AA", 0);
-	printf("[0]%s [1]%s\n", splitsing[0], splitsing[1]);
-	for (size_t i = 0; i < 1; i++)
-		free(splitsing[i]);
-	free(splitsing);
+	// splitsing = ft_split("Hallo1", ' ');
+	// for (size_t i = 0; i < 1; i++)
+	// 	printf("%s\n", splitsing[i]);
+	// for (size_t i = 0; i < 1; i++)
+	// 	free(splitsing[i]);
+	// free(splitsing);
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
