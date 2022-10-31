@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/30 20:30:58 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/31 16:33:33 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1067,12 +1067,29 @@ int		main(int argc, char *argv[])
 	for (size_t i = 0; i < 4; i++)
 		free(splitsing[i]);
 	free(splitsing);
-	// splitsing = ft_split("Hallo1", ' ');
-	// for (size_t i = 0; i < 1; i++)
-	// 	printf("%s\n", splitsing[i]);
-	// for (size_t i = 0; i < 1; i++)
-	// 	free(splitsing[i]);
-	// free(splitsing);
+	splitsing = ft_split("....It.....is......me....!.....Open.....up....", '.');
+	for (size_t i = 0; i < 7; i++)
+		printf("%s\n", splitsing[i]);
+	for (size_t i = 0; i < 7; i++)
+		free(splitsing[i]);
+	free(splitsing);
+	splitsing = ft_split("Hallo1", ' ');
+	for (size_t i = 0; i < 1; i++)
+		printf("%s\n", splitsing[i]);
+	for (size_t i = 0; i < 1; i++)
+		free(splitsing[i]);
+	free(splitsing);
+	splitsing = ft_split("", 'z');
+	for (size_t i = 0; i < 1; i++)
+		printf("%s\n", splitsing[i]);
+	for (size_t i = 0; i < 1; i++)
+		free(splitsing[i]);
+	free(splitsing);
+	splitsing = ft_split("AA", 0);
+	printf("[0]%s [1]%s\n", splitsing[0], splitsing[1]);
+	for (size_t i = 0; i < 1; i++)
+		free(splitsing[i]);
+	free(splitsing);
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
