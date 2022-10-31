@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/31 20:37:26 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/31 21:58:13 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -778,6 +778,10 @@ int		main(int argc, char *argv[])
 	 ft_strnstr("Weeeelcome", "elc", 100), 0, t++, _STR);
 	printf("OR: %s\nFT: %s\n", strnstr("Weeeelcome", "elc", 100),\
 	 ft_strnstr("Weeeelcome", "elc", 100));
+	TestResultCount += test(strnstr("Weeelcome", "eelc", -1),\
+	 ft_strnstr("Weeelcome", "eelc", -1), 0, t++, _STR);
+	printf("OR: %s\nFT: %s\n", strnstr("Weeelcome", "eelc", -1),\
+	 ft_strnstr("Weeelcome", "eelc", -1));
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
