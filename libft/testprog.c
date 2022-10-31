@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/31 21:58:13 by fras          ########   odam.nl         */
+/*   Updated: 2022/10/31 22:47:03 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -779,9 +779,9 @@ int		main(int argc, char *argv[])
 	printf("OR: %s\nFT: %s\n", strnstr("Weeeelcome", "elc", 100),\
 	 ft_strnstr("Weeeelcome", "elc", 100));
 	TestResultCount += test(strnstr("Weeelcome", "eelc", -1),\
-	 ft_strnstr("Weeelcome", "eelc", -1), 0, t++, _STR);
+	 ft_strnstr("Weeeelcome", "eelc", -1), 0, t++, _STR);
 	printf("OR: %s\nFT: %s\n", strnstr("Weeelcome", "eelc", -1),\
-	 ft_strnstr("Weeelcome", "eelc", -1));
+	 ft_strnstr("Weeeelcome", "eelc", -1));
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
@@ -1046,41 +1046,62 @@ int		main(int argc, char *argv[])
 	#define FCNAME "ft_split.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
 	char **splitsing;
-	// int i;
-	// i = 0;
-	// splitsing = ft_split("Hallo1 Hallo2 Hallo3", ' ');
-	// while (splitsing[i] != NULL)
-	// {
-	// 	printf("%s\n", splitsing[i]);
-	// 	i++;
-	// }
-	// i = 0;
-	// while (splitsing[i] != NULL)
-	// {
-	// 	free(splitsing[i]);
-	// 	i++;
-	// }
-	// free(splitsing);
-		int i;
+	int i;
 	i = 0;
 	splitsing = ft_split("Hallo1 Hallo2 Hallo3", ' ');
-	for (size_t i = 0; i < 3; i++)
+	TestResultCount += test("Hallo1", splitsing[0], 0, t++, _STR);
+	TestResultCount += test("Hallo2", splitsing[1], 0, t++, _STR);
+	TestResultCount += test("Hallo3", splitsing[2], 0, t++, _STR);
+	TestResultCount += test(NULL, splitsing[3], 0, t++, _STR);
+	while (splitsing[i])
+	{
 		printf("%s\n", splitsing[i]);
-	for (size_t i = 0; i < 3; i++)
-		free(splitsing[i]);
+		free(splitsing[i++]);
+	}
 	free(splitsing);
+	i = 0;
 	splitsing = ft_split("Hello who is there?", ' ');
-	for (size_t i = 0; i < 4; i++)
+	TestResultCount += test("Hello", splitsing[0], 0, t++, _STR);
+	TestResultCount += test("who", splitsing[1], 0, t++, _STR);
+	TestResultCount += test("is", splitsing[2], 0, t++, _STR);
+	TestResultCount += test("there?", splitsing[3], 0, t++, _STR);
+	TestResultCount += test(NULL, splitsing[4], 0, t++, _STR);
+	while (splitsing[i])
+	{
 		printf("%s\n", splitsing[i]);
-	for (size_t i = 0; i < 4; i++)
-		free(splitsing[i]);
+		free(splitsing[i++]);
+	}
 	free(splitsing);
-	// splitsing = ft_split("Hallo1", ' ');
-	// for (size_t i = 0; i < 1; i++)
-	// 	printf("%s\n", splitsing[i]);
-	// for (size_t i = 0; i < 1; i++)
-	// 	free(splitsing[i]);
-	// free(splitsing);
+	i = 0;
+	splitsing = ft_split("   It     is          me    ! !!  !!!    " , ' ');
+	TestResultCount += test("It", splitsing[0], 0, t++, _STR);
+	TestResultCount += test("is", splitsing[1], 0, t++, _STR);
+	TestResultCount += test("me", splitsing[2], 0, t++, _STR);
+	TestResultCount += test("!", splitsing[3], 0, t++, _STR);
+	TestResultCount += test("!!", splitsing[4], 0, t++, _STR);
+	TestResultCount += test("!!!", splitsing[5], 0, t++, _STR);
+	TestResultCount += test(NULL, splitsing[6], 0, t++, _STR);
+	while (splitsing[i])
+	{	
+		printf("%s\n", splitsing[i]);
+		free(splitsing[i++]);
+	}
+	free(splitsing);
+	i = 0;
+	splitsing = ft_split("Oh,hello.", ' ');
+	TestResultCount += test("Oh,hello.", splitsing[0], 0, t++, _STR);
+	TestResultCount += test(NULL, splitsing[1], 0, t++, _STR);
+	while (splitsing[i])
+	{	
+		printf("%s\n", splitsing[i]);
+		free(splitsing[i++]);
+	}
+	free(splitsing);
+	i = 0;
+	splitsing = ft_split("", ' ');
+	TestResultCount += test(NULL, splitsing[0], 0, t++, _STR);
+	printf("%s\n", splitsing[0]);
+	free(splitsing);
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
