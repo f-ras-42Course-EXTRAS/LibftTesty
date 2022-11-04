@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/11/04 15:59:48 by fras          ########   odam.nl         */
+/*   Updated: 2022/11/04 18:46:04 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,32 @@ void	ResetDoublePointer(void *p1, void *p2);
 void	StartCountdown (int countdowntimer);
 
 int	g_speedmode = 0;
+
+
+static char testfunc(unsigned int i, char c)
+{
+	if (i < 20)
+	{
+		if (c >= 'a' && c <= 'z')
+			return (c - 32);
+		else if (c >= 'A' && c <= 'Z')
+			return (c + 32);
+		else
+			return (c);
+	}
+	return (c);
+}
+
+static void testfunc2(unsigned int i, char *c)
+{
+	if (i < 20)
+	{
+		if (*c >= 'a' && *c <= 'z')
+			c = c - 32;
+		else if (*c >= 'A' && *c <= 'Z')
+			c = c + 32;
+	}
+}
 
 int		main(int argc, char *argv[])
 {
@@ -1121,6 +1147,35 @@ int		main(int argc, char *argv[])
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_strmapi.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	TestResultCount += test("hELLO[ZERO THIS OUT] welcome to Codam.",\
+	 ft_strmapi(str1, &testfunc), 0, t++, _STR);
+	TestResultCount += test("",\
+	 ft_strmapi(empty_str, &testfunc), 0, t++, _STR);
+	TestResultCount += test("h",\
+	 ft_strmapi("H", &testfunc), 0, t++, _STR);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_striteri.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	// TestResultCount += test("hELLO[ZERO THIS OUT] welcome to Codam.",\
+	//  ft_striteri(str1, &testfunc), 0, t++, _STR);
+	// TestResultCount += test("",\
+	//  ft_striteri(empty_str, &testfunc), 0, t++, _STR);
+	// TestResultCount += test("h",\
+	//  ft_striteri("H", &testfunc), 0, t++, _STR);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
 	// if (!g_speedmode) usleep(0.15*1000000);
 
 	// #define FCNAME "TEST.c"
