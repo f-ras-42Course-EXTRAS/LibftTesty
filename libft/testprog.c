@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/10/31 22:47:03 by fras          ########   odam.nl         */
+/*   Updated: 2022/11/04 15:59:48 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1106,6 +1106,21 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_itoa.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	TestResultCount += test("-234", ft_itoa(-234), 0, t++, _STR);
+	TestResultCount += test("0", ft_itoa(0), 0, t++, _STR);
+	TestResultCount += test("0", ft_itoa(-0), 0, t++, _STR);
+	TestResultCount += test("1000000", ft_itoa(1000000), 0, t++, _STR);
+	TestResultCount += test("-1", ft_itoa(-1), 0, t++, _STR);
+	TestResultCount += test("-2147483648", ft_itoa(-2147483648), 0, t++, _STR);
+	TestResultCount += test("-2147483647", ft_itoa(-2147483647), 0, t++, _STR);
+	TestResultCount += test("2147483647", ft_itoa(2147483647), 0, t++, _STR);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
 	// if (!g_speedmode) usleep(0.15*1000000);
 
 	// #define FCNAME "TEST.c"
