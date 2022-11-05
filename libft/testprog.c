@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/11/04 18:46:04 by fras          ########   odam.nl         */
+/*   Updated: 2022/11/05 13:20:54 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static void testfunc2(unsigned int i, char *c)
 	if (i < 20)
 	{
 		if (*c >= 'a' && *c <= 'z')
-			c = c - 32;
+			*c = *c - 32;
 		else if (*c >= 'A' && *c <= 'Z')
-			c = c + 32;
+			*c = *c + 32;
 	}
 }
 
@@ -1166,12 +1166,12 @@ int		main(int argc, char *argv[])
 
 	#define FCNAME "ft_striteri.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	// TestResultCount += test("hELLO[ZERO THIS OUT] welcome to Codam.",\
-	//  ft_striteri(str1, &testfunc), 0, t++, _STR);
-	// TestResultCount += test("",\
-	//  ft_striteri(empty_str, &testfunc), 0, t++, _STR);
-	// TestResultCount += test("h",\
-	//  ft_striteri("H", &testfunc), 0, t++, _STR);
+	ft_striteri(str1, &testfunc2);
+	TestResultCount += test("hELLO[ZERO THIS OUT] welcome to Codam.",\
+	 str1, 0, t++, _STR);
+	ft_striteri(empty_str, &testfunc2);
+	TestResultCount += test("", empty_str, 0, t++, _STR);
+	ResetStringsNArrays(str3, str4, orgsx, arr1, arr2, orga, _STR);
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
