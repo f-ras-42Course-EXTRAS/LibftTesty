@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/11/05 13:20:54 by fras          ########   odam.nl         */
+/*   Updated: 2022/11/05 14:52:37 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1176,6 +1176,63 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_putchar_fd.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	ft_putchar_fd('a', 0);
+	ft_putchar_fd('\n', 0);
+	ft_putchar_fd('a', 0);
+	ft_putchar_fd('\n', 0);
+	simple_test(1, 1, t++);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_putstr_fd.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	ft_putstr_fd("hello", 1);
+	ft_putstr_fd("\n", 1);
+	simple_test(1, 1, t++);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_putendl_fd.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	ft_putendl_fd("there!", 1);
+	simple_test(1, 1, t++);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_putnbr_fd.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	ft_putnbr_fd(1234, 1);
+	ft_putchar_fd('\n', 1);
+	ft_putnbr_fd(0, 1);
+	ft_putchar_fd('\n', 1);
+	ft_putnbr_fd(-1234, 1);
+	ft_putchar_fd('\n', 1);
+	ft_putnbr_fd(-1, 1);
+	ft_putchar_fd('\n', 1);
+	ft_putnbr_fd(-2147483648, 1);
+	ft_putchar_fd('\n', 1);
+	ft_putnbr_fd(2147483647, 1);
+	ft_putchar_fd('\n', 1);
+	simple_test(1, 1, t++);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+
 	// if (!g_speedmode) usleep(0.15*1000000);
 
 	// #define FCNAME "TEST.c"
@@ -1183,7 +1240,7 @@ int		main(int argc, char *argv[])
 	// // Insert values
 	// check = ResultCheck(&TestResultCount, &LastCount);
 	// printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
-	// #undef FCNAME;
+	// #undef FCNAME
 
 	//--FINAL RESULTS--
 	ProjectResultMsg(argc, candidate, TestResultCount);
