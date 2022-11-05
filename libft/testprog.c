@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/11/05 22:32:00 by fras          ########   odam.nl         */
+/*   Updated: 2022/11/05 23:52:21 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #define _ARR			2
 #define _BOTH			3
 #define _VAL			4
+#define _STRMALLOC		5
 
 #define _GREEN			"\e[0;32m"
 #define _RED			"\e[0;31m"
@@ -37,6 +38,7 @@ void	ResetStringsNArrays(char *s1, char *s2, const char *orgs,\
 							long *a1, long *a2, const long *orga, int mode);
 void	ResetDoublePointer(void *p1, void *p2);
 void	StartCountdown (int countdowntimer);
+int		t_list_test(void *input1, t_list *input2, int testnum);
 
 int	g_speedmode = 0;
 
@@ -95,11 +97,11 @@ int		main(int argc, char *argv[])
 	size_t			rtn7;
 	size_t			rtn8;
 	t_list			*rtn9;
+	t_list			*rtn10;
 
 	size_t			*ptr1;
 	char			*ptr2;
 	char			*ptr3;
-	t_list			**ptr4;
 
 	char 			candidate[32];
 	int				testerror;
@@ -1137,14 +1139,14 @@ int		main(int argc, char *argv[])
 
 	#define FCNAME "ft_itoa.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	TestResultCount += test("-234", ft_itoa(-234), 0, t++, _STR);
-	TestResultCount += test("0", ft_itoa(0), 0, t++, _STR);
-	TestResultCount += test("0", ft_itoa(-0), 0, t++, _STR);
-	TestResultCount += test("1000000", ft_itoa(1000000), 0, t++, _STR);
-	TestResultCount += test("-1", ft_itoa(-1), 0, t++, _STR);
-	TestResultCount += test("-2147483648", ft_itoa(-2147483648), 0, t++, _STR);
-	TestResultCount += test("-2147483647", ft_itoa(-2147483647), 0, t++, _STR);
-	TestResultCount += test("2147483647", ft_itoa(2147483647), 0, t++, _STR);
+	TestResultCount += test("-234", ft_itoa(-234), 0, t++, _STRMALLOC);
+	TestResultCount += test("0", ft_itoa(0), 0, t++, _STRMALLOC);
+	TestResultCount += test("0", ft_itoa(-0), 0, t++, _STRMALLOC);
+	TestResultCount += test("1000000", ft_itoa(1000000), 0, t++, _STRMALLOC);
+	TestResultCount += test("-1", ft_itoa(-1), 0, t++, _STRMALLOC);
+	TestResultCount += test("-2147483648", ft_itoa(-2147483648), 0, t++, _STRMALLOC);
+	TestResultCount += test("-2147483647", ft_itoa(-2147483647), 0, t++, _STRMALLOC);
+	TestResultCount += test("2147483647", ft_itoa(2147483647), 0, t++, _STRMALLOC);
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
@@ -1154,11 +1156,11 @@ int		main(int argc, char *argv[])
 	#define FCNAME "ft_strmapi.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
 	TestResultCount += test("hELLO[ZERO THIS OUT] welcome to Codam.",\
-	 ft_strmapi(str1, &testfunc), 0, t++, _STR);
+	 ft_strmapi(str1, &testfunc), 0, t++, _STRMALLOC);
 	TestResultCount += test("",\
-	 ft_strmapi(empty_str, &testfunc), 0, t++, _STR);
+	 ft_strmapi(empty_str, &testfunc), 0, t++, _STRMALLOC);
 	TestResultCount += test("h",\
-	 ft_strmapi("H", &testfunc), 0, t++, _STR);
+	 ft_strmapi("H", &testfunc), 0, t++, _STRMALLOC);
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
@@ -1242,7 +1244,10 @@ int		main(int argc, char *argv[])
 	#define FCNAME "ft_lstnew.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
 	rtn9 = ft_lstnew("Hello");
-	printf("%s", rtn9->content);
+	printf("%s\n", rtn9->content);
+	printf("%p\n", rtn9->next),
+	TestResultCount += test("Hello", rtn9->content, 0, t++, _STR);
+	TestResultCount += test(NULL, rtn9->next, 0, t++, _STR);
 	free(rtn9);
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
@@ -1252,8 +1257,17 @@ int		main(int argc, char *argv[])
 
 	#define FCNAME "ft_lstadd_front.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	rtn9 = ft_lstnew("Hello");
+	rtn9 = ft_lstnew("hello!");
 	printf("%s", rtn9->content);
+	rtn10 = ft_lstnew("There you are.. ");
+	printf("%s\n", rtn10->content);
+	printf("%p - %p\n", rtn9->next, rtn10->next);
+	ft_lstadd_front(&rtn9, rtn10);
+	printf("%s", rtn9->content);
+	printf("%s\n", rtn9->next->content),
+	TestResultCount += test("There you are.. ", rtn9->content, 0, t++, _STR);
+	TestResultCount += test("hello!", rtn9->next->content, 0, t++, _STR);
+	free(rtn9->next);
 	free(rtn9);
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
@@ -1312,6 +1326,23 @@ int		test(void *input1, void *input2, int len, int testnum, int mode)
 	}
 	if(mode == _VAL)
 		return (simple_test((int)input1, (int)input2, testnum));
+	if (mode == _STRMALLOC)
+	{
+		if(strcmp(input1, input2) == 0)
+		{
+			free(input2);
+			printf(_GREEN "TEST%d VALID\n" _COLOR_RESET, testnum);
+			if (!g_speedmode) usleep(0.075*1000000);
+			return(0);
+		}
+		else
+		{
+			free(input2);
+			printf(_RED "TEST%d FAILED\n" _COLOR_RESET, testnum);	
+			if (!g_speedmode) usleep(0.075*1000000);
+			return(1);
+		}
+	}
 	return (-1);
 }
 // -------------------------------------------------------------------------------------
