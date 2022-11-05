@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/11/05 17:47:43 by fras          ########   odam.nl         */
+/*   Updated: 2022/11/05 22:32:00 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int		main(int argc, char *argv[])
 	size_t			*ptr1;
 	char			*ptr2;
 	char			*ptr3;
+	t_list			**ptr4;
 
 	char 			candidate[32];
 	int				testerror;
@@ -1232,16 +1233,28 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-// -------------------------------------------------------------------------------------
+// *************************************************************************************
 //									B O N U S - PART
-// -------------------------------------------------------------------------------------
+// *************************************************************************************
 
 	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_lstnew.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	rtn9 = ft_lstnew("Hallo");
+	rtn9 = ft_lstnew("Hello");
 	printf("%s", rtn9->content);
+	free(rtn9);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+	
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_lstadd_front.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	rtn9 = ft_lstnew("Hello");
+	printf("%s", rtn9->content);
+	free(rtn9);
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
