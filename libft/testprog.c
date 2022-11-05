@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/11/05 14:52:37 by fras          ########   odam.nl         */
+/*   Updated: 2022/11/05 17:47:43 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,52 +68,52 @@ static void testfunc2(unsigned int i, char *c)
 
 int		main(int argc, char *argv[])
 {
-	const char orgs[] = "Hello[zero this out] welcome to Codam.";
-	char str1[] = "Hello[zero this out] welcome to Codam.";
-	char str2[] = "Hello[zero this out] welcome to Codam.";
-
-	char rtn1[64];
-	char rtn2[64];
+	const char		orgs[] = "Hello[zero this out] welcome to Codam.";
+	char			str1[] = "Hello[zero this out] welcome to Codam.";
+	char			str2[] = "Hello[zero this out] welcome to Codam.";
+	char 			orgsx[27 + 39] = "Let's concatenate!!!!!!!: ";
+	char 			str3[27 + 39] = "Let's concatenate!!!!!!!: ";
+	char 			str4[27 + 39] = "Let's concatenate!!!!!!!: ";
+	char 			empty_str[] = "";
 	
-	const long orga[12] = {0, 4294967254, -2147483648, 6983975, 444, 7,\
+	const long		orga[12] = {0, 4294967254, -2147483648, 6983975, 444, 7,\
 						57, 123, -4875769, 111, 222, 333};
-	long arr1[12] = {0, 4294967254, -2147483648, 6983975, 444, 7,\
+	long			arr1[12] = {0, 4294967254, -2147483648, 6983975, 444, 7,\
 						57, 123, -4875769, 111, 222, 333};
-	long arr2[12] = {0, 4294967254, -2147483648, 6983975, 444, 7,\
+	long			arr2[12] = {0, 4294967254, -2147483648, 6983975, 444, 7,\
 						57, 123, -4875769, 111, 222, 333};
+	unsigned char	arr3[256];
+	signed char		arr4[256];
+	int 			arr5[7] = {0, 6, 1, -1, 444, 7, 57};
 	
-	long rtn3[32] = {0};
-	long rtn4[32] = {0};
+	char			rtn1[64];
+	char			rtn2[64];
+	long			rtn3[32] = {0};
+	long			rtn4[32] = {0};
+	char			rtn5[256];
+	char			rtn6[256];
+	size_t			rtn7;
+	size_t			rtn8;
+	t_list			*rtn9;
 
-	unsigned char arr3[256];
-	signed char   arr4[256];
-	char          rtn5[256];
-	char          rtn6[256];
+	size_t			*ptr1;
+	char			*ptr2;
+	char			*ptr3;
 
-	int arr5[7] = {0, 6, 1, -1, 444, 7, 57};
+	char 			candidate[32];
+	int				testerror;
+	int 			TestResultCount;
+	int 			LastCount;
+	int 			check;
+	int 			t;
+	int 			countdowntimer;
 
-	size_t				rtn7;
-	size_t				rtn8;
-	
-	char empty_str[] = "";
-
-	char orgsx[27 + 39] = "Let's concatenate!!!!!!!: ";
-	char str3[27 + 39] = "Let's concatenate!!!!!!!: ";
-	char str4[27 + 39] = "Let's concatenate!!!!!!!: ";
-
-	size_t	*ptr1;
-	char	*ptr2;
-	char	*ptr3;
-	int	testerror = 0;
-	
-	char candidate[32];
-
-	int TestResultCount = 0;
-	int LastCount = 0;
-	int check = 0;
-	int t = 0;
-	int countdowntimer = 10;
-
+	testerror = 0;
+	TestResultCount = 0;
+	LastCount = 0;
+	check = 0;
+	t = 0;
+	countdowntimer = 10;
 	if (argc == 2 && strcmp(argv[1], "SPEEDMODE") == 0)
 	{
 		g_speedmode = 1;
@@ -1232,6 +1232,19 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
+// -------------------------------------------------------------------------------------
+//									B O N U S - PART
+// -------------------------------------------------------------------------------------
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_lstnew.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	rtn9 = ft_lstnew("Hallo");
+	printf("%s", rtn9->content);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
 
 	// if (!g_speedmode) usleep(0.15*1000000);
 
@@ -1247,6 +1260,7 @@ int		main(int argc, char *argv[])
 	return(0);
 }
 // -------------------------------------------------------------------------------------
+//						HELPER FUNCTIONS BELOW
 // -------------------------------------------------------------------------------------
 
 int		test(void *input1, void *input2, int len, int testnum, int mode)
