@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/11/07 00:59:56 by fras          ########   odam.nl         */
+/*   Updated: 2022/11/07 01:22:44 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int		main(int argc, char *argv[])
 	size_t			rtn8;
 	t_list			*rtn9;
 	t_list			*rtn10;
+	t_list			*rtn11;
 
 	size_t			*ptr1;
 	char			*ptr2;
@@ -1274,6 +1275,8 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
+	if (!g_speedmode) usleep(0.15*1000000);
+
 	#define FCNAME "ft_lstsize.c"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
 	rtn9 = ft_lstnew("hello!");
@@ -1287,6 +1290,27 @@ int		main(int argc, char *argv[])
 	free(rtn9);
 	rtn9 = NULL;
 	simple_test(0, ft_lstsize(rtn9), t++);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_lstlast.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	rtn9 = ft_lstnew("hello!");
+	rtn10 = ft_lstnew("There you are.. ");
+	ft_lstadd_front(&rtn9, rtn10);
+	rtn11 = ft_lstlast(rtn9);
+    test("hello!", rtn11->content, 0, t++, _STR);
+	test(NULL, rtn11->next, 0, t++, _STR);
+	free(rtn9->next);
+	free(rtn9);
+	rtn9 = ft_lstnew("hello!");
+	rtn11 = ft_lstlast(rtn9);
+	test("hello!", rtn11->content, 0, t++, _STR);
+	free(rtn9);
+	rtn9 = NULL;
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
