@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/11/07 01:22:44 by fras          ########   odam.nl         */
+/*   Updated: 2022/11/07 01:35:47 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1314,6 +1314,23 @@ int		main(int argc, char *argv[])
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	#define FCNAME "ft_lstadd_back.c"
+	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	rtn9 = ft_lstnew("hello!");
+	rtn10 = ft_lstnew("There you are.. ");
+	ft_lstadd_back(&rtn9, rtn10);
+	TestResultCount += test("hello!", rtn9->content, 0, t++, _STR);
+	TestResultCount += test("There you are.. ", rtn9->next->content, 0, t++, _STR);
+	TestResultCount += test(NULL, rtn9->next->next, 0, t++, _STR);
+	free(rtn9->next);
+	free(rtn9);
+	check = ResultCheck(&TestResultCount, &LastCount);
+	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	#undef FCNAME
+
 
 	// if (!g_speedmode) usleep(0.15*1000000);
 
