@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/11/07 01:35:47 by fras          ########   odam.nl         */
+/*   Updated: 2022/11/15 16:37:06 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ static void testfunc2(unsigned int i, char *c)
 	}
 }
 
+// static void testlstdel(void *content)
+// {
+// 	free(content);
+// 	content = NULL;
+// }
+
 int		main(int argc, char *argv[])
 {
 	const char		orgs[] = "Hello[zero this out] welcome to Codam.";
@@ -77,6 +83,8 @@ int		main(int argc, char *argv[])
 	char 			str3[27 + 39] = "Let's concatenate!!!!!!!: ";
 	char 			str4[27 + 39] = "Let's concatenate!!!!!!!: ";
 	char 			empty_str[] = "";
+	char 			*malloc_str1 = malloc(64 * sizeof(*malloc_str1));
+	char 			*malloc_str2 = malloc(64 * sizeof(*malloc_str2));
 	
 	const long		orga[12] = {0, 4294967254, -2147483648, 6983975, 444, 7,\
 						57, 123, -4875769, 111, 222, 333};
@@ -1327,9 +1335,29 @@ int		main(int argc, char *argv[])
 	TestResultCount += test(NULL, rtn9->next->next, 0, t++, _STR);
 	free(rtn9->next);
 	free(rtn9);
+	rtn9 = NULL;
 	check = ResultCheck(&TestResultCount, &LastCount);
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
+
+	if (!g_speedmode) usleep(0.15*1000000);
+
+	// #define FCNAME "ft_lstdelone.c"
+	// printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	// malloc_str1 = "hello!";
+	// rtn9 = ft_lstnew(malloc_str1);
+	// TestResultCount += test(malloc_str1, rtn9->content, 0, t++, _STR);
+	// // rtn9->next = rtn10;
+	// // rtn10 = ft_lstnew("There you are.. ");
+	// ft_lstdelone(rtn9, testlstdel);
+	// // // TestResultCount += test("hello!", rtn9->content, 0, t++, _STR);
+	// // TestResultCount += test("There you are.. ", rtn9->next->content, 0, t++, _STR);
+	// // TestResultCount += test(NULL, rtn9->next->next, 0, t++, _STR);
+	// // free(rtn9->next);
+	// // free(rtn9);
+	// check = ResultCheck(&TestResultCount, &LastCount);
+	// printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	// #undef FCNAME
 
 
 	// if (!g_speedmode) usleep(0.15*1000000);
