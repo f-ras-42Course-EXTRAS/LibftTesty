@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   testprog.c                                         :+:    :+:            */
+/*   LibftTesty.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/11/15 16:37:06 by fras          ########   odam.nl         */
+/*   Updated: 2022/11/20 20:59:05 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
+#include "libft/libft.h"
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -104,10 +103,6 @@ int		main(int argc, char *argv[])
 	char			rtn6[256];
 	size_t			rtn7;
 	size_t			rtn8;
-	t_list			*rtn9;
-	t_list			*rtn10;
-	t_list			*rtn11;
-
 	size_t			*ptr1;
 	char			*ptr2;
 	char			*ptr3;
@@ -126,14 +121,28 @@ int		main(int argc, char *argv[])
 	check = 0;
 	t = 0;
 	countdowntimer = 10;
-	if (argc == 2 && strcmp(argv[1], "SPEEDMODE") == 0)
+	if (argc == 3 && strcmp(argv[2], "BONUSMODE") == 0)
+	{
+		#define bonus
+		strcpy(candidate, argv[1]);
+	}
+	else if (argc == 2 && strcmp(argv[1], "BONUSMODE") == 0)
+	{
+		#define bonus
+	}
+	if (argc == 3 && strcmp(argv[2], "SPEEDMODE") == 0)
 	{
 		g_speedmode = 1;
-		argc = 1;
-	}
-	if (argc == 2)
+		#define bonus
 		strcpy(candidate, argv[1]);
-
+	}
+	else if (argc == 2 && strcmp(argv[1], "SPEEDMODE") == 0)
+	{
+		g_speedmode = 1;
+		#define bonus
+	}
+	else if (argc == 2)
+		strcpy(candidate, argv[1]);
 
 	#define FCNAME "TEST PROGRAM"
 	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
@@ -1244,10 +1253,15 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-// *************************************************************************************
-//									B O N U S - PART
-// *************************************************************************************
-
+	// *************************************************************************************
+	//									B O N U S - PART
+	// *************************************************************************************
+	
+	#ifdef bonus
+	t_list			*rtn9;
+	t_list			*rtn10;
+	t_list			*rtn11;
+	
 	if (!g_speedmode) usleep(0.15*1000000);
 
 	#define FCNAME "ft_lstnew.c"
@@ -1368,11 +1382,15 @@ int		main(int argc, char *argv[])
 	// check = ResultCheck(&TestResultCount, &LastCount);
 	// printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	// #undef FCNAME
+	#endif
 
 	//--FINAL RESULTS--
 	ProjectResultMsg(argc, candidate, TestResultCount);
 	return(0);
 }
+	
+
+
 // -------------------------------------------------------------------------------------
 //						HELPER FUNCTIONS BELOW
 // -------------------------------------------------------------------------------------
