@@ -6,11 +6,11 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/11/20 20:59:05 by fras          ########   odam.nl         */
+/*   Updated: 2022/11/24 00:18:50 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "libft.h"
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>

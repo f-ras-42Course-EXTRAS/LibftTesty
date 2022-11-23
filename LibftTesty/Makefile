@@ -19,7 +19,8 @@ CC = gcc
 CFLAGS = -Werror -Wextra -Wall
 SOURCE = LibftTesty.c
 TESTSUBJECT = libft/libft.a
-HEADER = libft/libft.h
+HEADER = libft/include/libft.h
+INCLUDE = -I libft/include
 
 .PHONY: all clean fclean re bonus speedtest leakscheck debug leaksinfo alldebugchecks
 
@@ -28,12 +29,12 @@ BONUS = BONUSMODE
 endif
 
 $(NAME): $(SOURCE) $(TESTSUBJECT) $(HEADER)
-	$(CC) $(CFLAGS) $< -L. $(TESTSUBJECT) -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) $< -L. $(TESTSUBJECT) -o $@
 
 $(TESTSUBJECT):
 	$(MAKE) -C libft
 
-test: $(NAME) $(TESTSUBJECT)
+test: $(NAME) bonus $(TESTSUBJECT)
 	./$< $(CANDIDATE) $(BONUS)
 
 testbonus: bonus test
