@@ -6,7 +6,7 @@
 /*   By: fras <fras@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/31 12:44:58 by fras          #+#    #+#                 */
-/*   Updated: 2022/11/24 00:18:50 by fras          ########   odam.nl         */
+/*   Updated: 2024/07/15 19:10:15 by fras          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1253,106 +1253,106 @@ int		main(int argc, char *argv[])
 	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	#undef FCNAME
 
-	// *************************************************************************************
-	//									B O N U S - PART
-	// *************************************************************************************
+	// // *************************************************************************************
+	// //									B O N U S - PART
+	// // *************************************************************************************
 	
-	#ifdef bonus
-	t_list			*rtn9;
-	t_list			*rtn10;
-	t_list			*rtn11;
+	// #ifdef bonus
+	// t_list			*rtn9;
+	// t_list			*rtn10;
+	// t_list			*rtn11;
 	
-	if (!g_speedmode) usleep(0.15*1000000);
+	// if (!g_speedmode) usleep(0.15*1000000);
 
-	#define FCNAME "ft_lstnew.c"
-	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	rtn9 = ft_lstnew("Hello");
-	printf("%s\n", rtn9->content);
-	printf("%p\n", rtn9->next),
-	TestResultCount += test("Hello", rtn9->content, 0, t++, _STR);
-	TestResultCount += test(NULL, rtn9->next, 0, t++, _STR);
-	free(rtn9);
-	check = ResultCheck(&TestResultCount, &LastCount);
-	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
-	#undef FCNAME
+	// #define FCNAME "ft_lstnew.c"
+	// printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	// rtn9 = ft_lstnew("Hello");
+	// printf("%s\n", rtn9->content);
+	// printf("%p\n", rtn9->next),
+	// TestResultCount += test("Hello", rtn9->content, 0, t++, _STR);
+	// TestResultCount += test(NULL, rtn9->next, 0, t++, _STR);
+	// free(rtn9);
+	// check = ResultCheck(&TestResultCount, &LastCount);
+	// printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	// #undef FCNAME
 	
-	if (!g_speedmode) usleep(0.15*1000000);
+	// if (!g_speedmode) usleep(0.15*1000000);
 
-	#define FCNAME "ft_lstadd_front.c"
-	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	rtn9 = ft_lstnew("hello!");
-	printf("%s", rtn9->content);
-	rtn10 = ft_lstnew("There you are.. ");
-	printf("%s\n", rtn10->content);
-	printf("%p - %p\n", rtn9->next, rtn10->next);
-	ft_lstadd_front(&rtn9, rtn10);
-	printf("%s", rtn9->content);
-	printf("%s\n", rtn9->next->content),
-	TestResultCount += test("There you are.. ", rtn9->content, 0, t++, _STR);
-	TestResultCount += test("hello!", rtn9->next->content, 0, t++, _STR);
-	TestResultCount += test(NULL, rtn9->next->next, 0, t++, _STR);
-	free(rtn9->next);
-	free(rtn9);
-	check = ResultCheck(&TestResultCount, &LastCount);
-	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
-	#undef FCNAME
+	// #define FCNAME "ft_lstadd_front.c"
+	// printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	// rtn9 = ft_lstnew("hello!");
+	// printf("%s", rtn9->content);
+	// rtn10 = ft_lstnew("There you are.. ");
+	// printf("%s\n", rtn10->content);
+	// printf("%p - %p\n", rtn9->next, rtn10->next);
+	// ft_lstadd_front(&rtn9, rtn10);
+	// printf("%s", rtn9->content);
+	// printf("%s\n", rtn9->next->content),
+	// TestResultCount += test("There you are.. ", rtn9->content, 0, t++, _STR);
+	// TestResultCount += test("hello!", rtn9->next->content, 0, t++, _STR);
+	// TestResultCount += test(NULL, rtn9->next->next, 0, t++, _STR);
+	// free(rtn9->next);
+	// free(rtn9);
+	// check = ResultCheck(&TestResultCount, &LastCount);
+	// printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	// #undef FCNAME
 
-	if (!g_speedmode) usleep(0.15*1000000);
+	// if (!g_speedmode) usleep(0.15*1000000);
 
-	#define FCNAME "ft_lstsize.c"
-	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	rtn9 = ft_lstnew("hello!");
-	rtn10 = ft_lstnew("There you are.. ");
-	ft_lstadd_front(&rtn9, rtn10);
-    simple_test(2, ft_lstsize(rtn9), t++);
-	free(rtn9->next);
-	free(rtn9);
-	rtn9 = ft_lstnew("hello!");
-	simple_test(1, ft_lstsize(rtn9), t++);
-	free(rtn9);
-	rtn9 = NULL;
-	simple_test(0, ft_lstsize(rtn9), t++);
-	check = ResultCheck(&TestResultCount, &LastCount);
-	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
-	#undef FCNAME
+	// #define FCNAME "ft_lstsize.c"
+	// printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	// rtn9 = ft_lstnew("hello!");
+	// rtn10 = ft_lstnew("There you are.. ");
+	// ft_lstadd_front(&rtn9, rtn10);
+    // simple_test(2, ft_lstsize(rtn9), t++);
+	// free(rtn9->next);
+	// free(rtn9);
+	// rtn9 = ft_lstnew("hello!");
+	// simple_test(1, ft_lstsize(rtn9), t++);
+	// free(rtn9);
+	// rtn9 = NULL;
+	// simple_test(0, ft_lstsize(rtn9), t++);
+	// check = ResultCheck(&TestResultCount, &LastCount);
+	// printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	// #undef FCNAME
 
-	if (!g_speedmode) usleep(0.15*1000000);
+	// if (!g_speedmode) usleep(0.15*1000000);
 
-	#define FCNAME "ft_lstlast.c"
-	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	rtn9 = ft_lstnew("hello!");
-	rtn10 = ft_lstnew("There you are.. ");
-	ft_lstadd_front(&rtn9, rtn10);
-	rtn11 = ft_lstlast(rtn9);
-    test("hello!", rtn11->content, 0, t++, _STR);
-	test(NULL, rtn11->next, 0, t++, _STR);
-	free(rtn9->next);
-	free(rtn9);
-	rtn9 = ft_lstnew("hello!");
-	rtn11 = ft_lstlast(rtn9);
-	test("hello!", rtn11->content, 0, t++, _STR);
-	free(rtn9);
-	rtn9 = NULL;
-	check = ResultCheck(&TestResultCount, &LastCount);
-	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
-	#undef FCNAME
+	// #define FCNAME "ft_lstlast.c"
+	// printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	// rtn9 = ft_lstnew("hello!");
+	// rtn10 = ft_lstnew("There you are.. ");
+	// ft_lstadd_front(&rtn9, rtn10);
+	// rtn11 = ft_lstlast(rtn9);
+    // test("hello!", rtn11->content, 0, t++, _STR);
+	// test(NULL, rtn11->next, 0, t++, _STR);
+	// free(rtn9->next);
+	// free(rtn9);
+	// rtn9 = ft_lstnew("hello!");
+	// rtn11 = ft_lstlast(rtn9);
+	// test("hello!", rtn11->content, 0, t++, _STR);
+	// free(rtn9);
+	// rtn9 = NULL;
+	// check = ResultCheck(&TestResultCount, &LastCount);
+	// printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	// #undef FCNAME
 
-	if (!g_speedmode) usleep(0.15*1000000);
+	// if (!g_speedmode) usleep(0.15*1000000);
 
-	#define FCNAME "ft_lstadd_back.c"
-	printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
-	rtn9 = ft_lstnew("hello!");
-	rtn10 = ft_lstnew("There you are.. ");
-	ft_lstadd_back(&rtn9, rtn10);
-	TestResultCount += test("hello!", rtn9->content, 0, t++, _STR);
-	TestResultCount += test("There you are.. ", rtn9->next->content, 0, t++, _STR);
-	TestResultCount += test(NULL, rtn9->next->next, 0, t++, _STR);
-	free(rtn9->next);
-	free(rtn9);
-	rtn9 = NULL;
-	check = ResultCheck(&TestResultCount, &LastCount);
-	printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
-	#undef FCNAME
+	// #define FCNAME "ft_lstadd_back.c"
+	// printf("\n\n%s\n-------------- %s --------------\n\n", FCNAME, FCNAME);
+	// rtn9 = ft_lstnew("hello!");
+	// rtn10 = ft_lstnew("There you are.. ");
+	// ft_lstadd_back(&rtn9, rtn10);
+	// TestResultCount += test("hello!", rtn9->content, 0, t++, _STR);
+	// TestResultCount += test("There you are.. ", rtn9->next->content, 0, t++, _STR);
+	// TestResultCount += test(NULL, rtn9->next->next, 0, t++, _STR);
+	// free(rtn9->next);
+	// free(rtn9);
+	// rtn9 = NULL;
+	// check = ResultCheck(&TestResultCount, &LastCount);
+	// printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
+	// #undef FCNAME
 
 	if (!g_speedmode) usleep(0.15*1000000);
 
@@ -1382,7 +1382,7 @@ int		main(int argc, char *argv[])
 	// check = ResultCheck(&TestResultCount, &LastCount);
 	// printf("\n----------------- %s -----------------\n\n", TestResultMsg(check));
 	// #undef FCNAME
-	#endif
+	// #endif
 
 	//--FINAL RESULTS--
 	ProjectResultMsg(argc, candidate, TestResultCount);
